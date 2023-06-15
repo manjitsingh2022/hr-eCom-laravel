@@ -1,0 +1,17 @@
+#whatsapp {
+    position: fixed;
+    top: 50%;
+    right: -25px; /* Adjust the desired distance from the right side */
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#whatsapp img {
+    height: 80px;
+    width: 80px;
+    transition: transform 0.3s ease;
+}
+
+#whatsapp img:hover {
+    transform: scale(1.2);
+}
