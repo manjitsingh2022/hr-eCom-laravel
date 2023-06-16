@@ -21,17 +21,18 @@
 
                                 <ul id="navigation">
                                     <li><a href="{{route('home')}}">Home</a></li> 
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="blog.html">Blog</a>
+                                    {{-- <li><a href="shop.html">shop</a></li>
+                                    <li><a href="about.html">About</a></li> --}}
+                                    {{-- <li><a href="blog.html">Blog</a>
                                         <ul class="submenu">
                                             <li><a href="blog.html">Blog</a></li>
                                             <li><a href="blog_details.html">Blog Details</a></li>
                                             <li><a href="elements.html">Elements</a></li>
                                             <li><a href="product_details.html">Product Details</a></li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li><a href="{{route('contact')}}">Contact</a></li>
+                                    <li><a href="{{route('logout')}}">Logout</a></li>
                                 </ul>
                             </nav>
                         </div>   
@@ -62,12 +63,13 @@
                                 <ul id="navigation">
                                     @foreach($categories as $category)
                                         <li>
-                                            <a href="{{ route('category.show', ['category' => $category->category_name]) }}">{{ $category->category_name }}</a>
+                                            <a href="{{ route('category.show', ['category' => $category->id]) }}">{{ $category->category_name }}</a>
                                             @if($category->subcategories->count() > 0)
+                                            
                                                 <ul class="submenu">
                                                     @foreach($category->subcategories as $subcategory)
                                                         <li>
-                                                            <a href="{{ route('category.show', ['category' => $subcategory->category_name]) }}">{{ $subcategory->category_name }}</a>
+                                                            <a href="{{ route('category.show', ['category' => $subcategory->id]) }}">{{ $subcategory->category_name }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>

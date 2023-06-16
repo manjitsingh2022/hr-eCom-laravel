@@ -1,4 +1,34 @@
 @extends('layout.app')
+<style>
+  .wish {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .wish i {
+    color: #ff0000;
+    font-size: 18px;
+  }
+
+  .productimage {
+  width: 100%;
+  max-height: 320px;
+  width: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+</style>
+
 @section('content')
 <main>
     <!--? Hero Area Start-->
@@ -90,14 +120,17 @@
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="single-popular-items mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
               <div class="popular-img">
-                <img src="{{asset('product/' . $product->image)}}"  alt="">
+                <img src="{{asset('product/' . $product->image)}}"  alt="" class="productimage">
                 <div class="img-cap">
                   <span>{{$product->product_name}}</span>
                 </div>
                 <div class="favorit-items">
-                  <a href="shop.html" class="btn">Shop Now</a>
+                  <a href="{{route('contact')}}" class="btn">Shop Now</a>
                 </div>
               </div>
+            </div>
+            <div class="wish">
+              <i class="fas fa-heart"></i>
             </div>
           </div>
           @endforeach
@@ -118,17 +151,18 @@
           </div>
         </div>
         <div class="row">
+          @foreach ($products as $product)
           <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
             <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
               <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival1.png')}}" alt="">
+                <img src="{{asset('product/' . $product->image)}}"  alt="" height="240px">
                 <div class="favorit-items">
                   <!-- <span class="flaticon-heart"></span> -->
                   <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
                 </div>
               </div>
               <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
+                <h3><a href="product_details.html">{{$product->product_name}}</a></h3>
                 <div class="rating mb-10">
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
@@ -136,164 +170,11 @@
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                 </div>
-                <span>$ 30.00</span>
+                <span> Rs. {{$product->price}}</span>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival2.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival3.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival4.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival5.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival6.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival7.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="single-new-arrival mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
-              <div class="popular-img">
-                <img src="{{asset('public/home/assets/img/gallery/arrival8.png')}}" alt="">
-                <div class="favorit-items">
-                  <!-- <span class="flaticon-heart"></span> -->
-                  <img src="{{asset('public/home/assets/img/gallery/favorit-card.png')}}" alt="">
-                </div>
-              </div>
-              <div class="popular-caption">
-                <h3><a href="product_details.html">Knitted Jumper</a></h3>
-                <div class="rating mb-10">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>$ 30.00</span>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
         <!-- Button -->
         <div class="row justify-content-center">
@@ -305,7 +186,7 @@
     </div>
     <!--? New Arrival End -->
     <!--? collection -->
-    {{-- <section class="collection section-bg2 section-padding30 section-over1 ml-15 mr-15"
+    <section class="collection section-bg2 section-padding30 section-over1 ml-15 mr-15"
       data-background="{{asset('public/home/assets/img/gallery/section_bg01.png')}}">
       <div class="container-fluid"></div>
       <div class="row justify-content-center">
@@ -317,10 +198,10 @@
         </div>
       </div>
       </div>
-    </section> --}}
+    </section>
     <!-- End collection -->
     <!--? Popular Locations Start 01-->
-    {{-- <div class="popular-product pt-50">
+    <div class="popular-product pt-50">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12">
@@ -347,10 +228,10 @@
           </div>
         </div>
       </div>
-    </div> --}}
+    </div>
     <!-- Popular Locations End -->
     <!--? Services Area Start -->
-    {{-- <div class="categories-area section-padding40 gray-bg">
+    <div class="categories-area section-padding40 gray-bg">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
@@ -399,7 +280,7 @@
           </div>
         </div>
       </div>
-    </div> --}}
+    </div>
     <!--? Services Area End -->
   </main>
 @endsection

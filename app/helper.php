@@ -2,6 +2,10 @@
 
 // Important functions 
 
+use App\Models\Category;
+use App\Models\product;
+use App\Models\User;
+
 if (!function_exists('p')) {
     function p($data)
     {
@@ -20,10 +24,16 @@ if (!function_exists('get_formatted_date')) {
 }
 
 
+if (!function_exists('getcategories')) {
+    function getcategories($parent_id = 0)
+    {
+        $categories = Category::where('parent_id', $parent_id)->get();
+        return $categories;
+    }
+}
 
-use App\Models\category;
-use App\Models\product;
-use App\Models\User;
+
+
 
 
 

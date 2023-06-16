@@ -31,27 +31,34 @@
     <input type="text" name="category_name" id="category_name" class="form-control" required>
   </div>
 
-  <div class="form-group">
-    <label for="parent_id">Parent Category</label>
-    <select name="parent_id" id="parent_id" class="form-control">
-      <option value="">Select Parent Category</option>
-      @foreach ($categories as $category)
-      <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-      @endforeach
-    </select>
-  </div>
-
-
-
-
-
   {{-- <div class="form-group">
-    <label for="status">Status</label>
-    <select name="status" id="status" class="form-control">
-      <option value="1" {{ old('status', $category->status) == 1 ? 'selected' : '' }}>Active</option>
-      <option value="0" {{ old('status', $category->status) == 0 ? 'selected' : '' }}>Inactive</option>
-    </select>
-  </div> --}}
+  <label for="parent_id">Parent Category</label>
+  <select name="parent_id" id="parent_id" class="form-control">
+    <option value="">Select Parent Category</option>
+    @foreach ($categories as $category)
+      <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+    @endforeach
+  </select>
+</div> --}}
+
+<div class="form-group">
+  <label for="subcategory_id">Sub Category</label>
+  <select name="subcategory_id" id="subcategory_id" class="form-control">
+    <option value="">Select Subcategory</option>
+    @foreach($categories as $category)
+      <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+      @if($category->subcategories->count() > 0)
+        @foreach($category->subcategories as $subcategory)
+          <option value="{{ $subcategory->id }}">- {{ $subcategory->category_name }}</option>
+        @endforeach
+      @endif
+    @endforeach
+  </select>
+</div>
+
+
+
+  
 
 
   <button type="submit" class="btn btn-primary">Create Category</button>

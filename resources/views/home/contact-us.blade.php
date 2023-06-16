@@ -104,8 +104,8 @@
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-home"></i></span>
                             <div class="media-body">
-                                <h3>Buttonwood, California.</h3>
-                                <p>Rosemead, CA 91770</p>
+                                <h3>The Beverly Hills </h3>
+                                <p>Luxury Boutique.</p>
                             </div>
                         </div>
                         <div class="media contact-info">
