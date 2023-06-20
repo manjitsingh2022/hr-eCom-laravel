@@ -13,6 +13,8 @@ class CategoryController extends Controller
         return view('admin.categories.create', compact('categories'));
     }
 
+
+
     public function storeCatgory(Request $request)
     {
         $validatedData = $request->validate([
@@ -37,5 +39,13 @@ class CategoryController extends Controller
         } else {
             return redirect()->route('viewcategory')->with('error', 'Category already exists. Please choose a different name.');
         }
+    }
+
+
+
+    public function getSubcategories(Request $request)
+    {
+        $subcategories = Category::where('parent_id', $request->parentCategoryId)->where('status', 1)->get();
+        return response()->json($subcategories);
     }
 }

@@ -31,11 +31,27 @@
         <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
                 <h4>Shop Category</h4>
-                <ul>
+                {{-- <ul>
                     <li><a href="#">Kurta</a></li>
                     <li><a href="#">Suit</a></li>
                     <li><a href="#">Dresses</a></li>
-                </ul>
+                </ul> --}}
+                @foreach(mainCategory() as $category)
+                    <a href="{{ route('category.show', ['category' => $category->id]) }}">{{ $category->category_name }}</a> <br>
+                    {{-- @if($category->subcategories->count() > 0) --}}
+                    
+                        {{-- <ul class="submenu">
+                            @foreach($category->subcategories as $subcategory)
+                                <li>
+                                    <a href="{{ route('category.show', ['category' => $subcategory->id]) }}">{{ $subcategory->category_name }}</a>
+                                </li>
+                            @endforeach
+                        </ul> --}}
+                    {{-- @endif --}}
+            @endforeach
+
+
+
             </div>
         </div>
     </div>

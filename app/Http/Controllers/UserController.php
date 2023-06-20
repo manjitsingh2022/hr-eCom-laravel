@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -18,6 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id', 0)->get();
+
         $products = Product::all();
         return view('home.home', compact('categories', 'products'));
     }
@@ -25,19 +26,30 @@ class UserController extends Controller
     public function contact()
     {
 
-        $categories = getcategories();
+        $categories = Category::where('parent_id', 0)->get();
         return view('home.contact-us', compact('categories'));
     }
 
+
+
     public function showdataCategory($category)
     {
-        $categories = Category::where('category_name', $category)->first();
+
+        $categories = Category::find($category);
+
 
         if (!empty($categories)) {
             $products = Product::where('parent_id', $categories->id)->get();
-            return view('home.home', compact('categories', 'products'));
+
+
+            return view('home.product_details', compact('categories', 'products',));
         }
+
+        return abort(404);
     }
+
+
+
 
 
 

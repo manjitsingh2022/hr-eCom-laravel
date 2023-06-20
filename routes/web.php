@@ -28,6 +28,7 @@ Route::post('registerpost', [UserController::class, 'registerpost'])->name('regi
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('contact-us', [UserController::class, 'contact'])->name('contact');
+
 Route::get('category/{category}', [UserController::class, 'showdataCategory'])->name('category.show');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -37,8 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin', [AdminController::class, 'adminIndex'])->name('dashboard');
         Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('viewcategory');
         Route::post('categories', [CategoryController::class, 'storeCatgory'])->name('categories.store');
-        Route::get('admin/product/create', [ProductController::class, 'show'])->name('product');
+        Route::post('get-subcategories', [CategoryController::class, 'getSubcategories'])->name('getSubcategories');
 
+        Route::get('admin/product/create', [ProductController::class, 'show'])->name('product');
         Route::post('products', [ProductController::class, 'storeProduct'])->name('products.store');
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
     });

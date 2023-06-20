@@ -24,7 +24,9 @@ class ProductController extends Controller
         $product->discount_price = $request->discount_price;
         $product->parent_id = $request->parent_id;
 
-
+        if ($request->parent_id != 0 && $request->subcategory_id) {
+            $product->parent_id = $request->subcategory_id;
+        }
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

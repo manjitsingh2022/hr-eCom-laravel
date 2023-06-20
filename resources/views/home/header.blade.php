@@ -61,7 +61,7 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    @foreach($categories as $category)
+                                    @foreach(mainCategory() as $category)
                                         <li>
                                             <a href="{{ route('category.show', ['category' => $category->id]) }}">{{ $category->category_name }}</a>
                                             @if($category->subcategories->count() > 0)
