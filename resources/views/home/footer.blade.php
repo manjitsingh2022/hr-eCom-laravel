@@ -18,11 +18,11 @@
                        </div>
                    </div>
                    <!-- social -->
-                   <div class="footer-social">
+                   {{-- <div class="footer-social">
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                </div>
+                   </div> --}}
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                     <li><a href="#">Dresses</a></li>
                 </ul> --}}
                 @foreach(mainCategory() as $category)
-                    <a href="{{ route('category.show', ['category' => $category->id]) }}">{{ $category->category_name }}</a> <br>
+                    <a href="{{ route('category.show', ['category' => $category->id ,'categoryname' => strtolower($category->category_name)]) }}">{{ $category->category_name }}</a> <br>
                     {{-- @if($category->subcategories->count() > 0) --}}
                     
                         {{-- <ul class="submenu">

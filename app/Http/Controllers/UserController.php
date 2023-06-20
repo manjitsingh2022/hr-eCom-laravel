@@ -32,7 +32,7 @@ class UserController extends Controller
 
 
 
-    public function showdataCategory($category)
+    public function showdataCategory($category, $categoryname)
     {
 
         $categories = Category::find($category);
@@ -47,6 +47,7 @@ class UserController extends Controller
 
         return abort(404);
     }
+
 
 
 
@@ -79,6 +80,7 @@ class UserController extends Controller
 
         return redirect()->route('login')->with('error', 'Invalid login credentials');
     }
+
 
 
     public function register()

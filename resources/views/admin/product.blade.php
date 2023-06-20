@@ -60,17 +60,16 @@
             <label for="quantity" class="form-label">Product Quantity:</label>
             <input class="form-control" type="number" name="quantity" placeholder="Write a quantity." required />
           </div>
-          <div class="form-group">
+          <div class="mb-3">
             <label for="parent_id">Parent Category:</label>
             <select name="parent_id" id="parent_id" class="form-control" required>
                 <option value="">Select Parent Category</option>
                 @foreach ($categories as $category)
-                <option value="{{ $category->id }}">
-                    {{ $category->category_name }}
-                </option>
+                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                 @endforeach
             </select>
         </div>
+        
         <div class="form-group" id="hidesubcategory">
             <label for="subcategory">Sub Category:</label>
             <select name="subcategory_id" id="subcategory" class="form-control" >

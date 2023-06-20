@@ -36,6 +36,22 @@ if (!function_exists('mainCategory')) {
 
 
 
+
+
+// if (!function_exists('mainCategory')) {
+//     function mainCategory()
+//     {
+//         $data = Category::where('parent_id', 0)->where('status', 1)->select('id', 'category_name')->get();
+
+//         $dataLowercase = $data->map(function ($item, $key) {
+//             $item['category_name'] = strtolower($item['category_name']);
+//             return $item;
+//         });
+
+//         return $dataLowercase;
+//     }
+// }
+
 // if (!function_exists('adminProfile')) {
 //     function adminProfile()
 //     {

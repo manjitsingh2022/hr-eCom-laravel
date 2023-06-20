@@ -43,12 +43,12 @@
 @endsection
 
 @section('content')
-<h1 class="display-4">All Products</h1>
+<h1 >All Products</h1>
 <table >
    
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Product Name</th>
             <th>Description</th>
             <th>Image</th>
             <th>Category</th>
@@ -62,7 +62,7 @@
     <tbody>
         @foreach($products as $product)
         <tr>
-            <td>{{ $product->title }}</td>
+            <td>{{ $product->product_name }}</td>
             <td>{{ $product->description }}</td>
             <td><img src="{{ asset('product/' . $product->image) }}" alt="Product Image" style="width: 100px; height: 100px; border-radius: 0;"></td>
             <td>{{ $product->catagory }}</td>

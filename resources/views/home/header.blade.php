@@ -32,7 +32,13 @@
                                         </ul>
                                     </li> --}}
                                     <li><a href="{{route('contact')}}">Contact</a></li>
-                                    <li><a href="{{route('logout')}}">Logout</a></li>
+
+                                    @if(session('user_id'))
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                                    @endif
+                                
+
+
                                 </ul>
                             </nav>
                         </div>   
@@ -63,13 +69,12 @@
                                 <ul id="navigation">
                                     @foreach(mainCategory() as $category)
                                         <li>
-                                            <a href="{{ route('category.show', ['category' => $category->id]) }}">{{ $category->category_name }}</a>
+                                            <a href="{{ route('category.show', ['category' => $category->id, 'categoryname' => strtolower($category->category_name)]) }}">{{ $category->category_name }}</a>
                                             @if($category->subcategories->count() > 0)
-                                            
                                                 <ul class="submenu">
                                                     @foreach($category->subcategories as $subcategory)
                                                         <li>
-                                                            <a href="{{ route('category.show', ['category' => $subcategory->id]) }}">{{ $subcategory->category_name }}</a>
+                                                            <a href="{{ route('category.show', ['category' => $subcategory->id, 'categoryname' => strtolower($subcategory->category_name)]) }}">{{ $subcategory->category_name }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -77,6 +82,7 @@
                                         </li>
                                     @endforeach
                                 </ul>
+                                
                             </nav>
                             
                             

@@ -37,6 +37,94 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->back()->with('message', 'Product added successfully.');
+        return redirect()->route('showproduct')->with('message', 'Product added successfully.');
+    }
+
+
+
+    public function view_product()
+    {
+
+        $categories =  Category::all();
+        return view('admin.product', compact('categories'));
+    }
+
+
+
+    public function show_product()
+    {
+        $products = Product::all();
+
+        return view("admin.show_product", compact('products'));
+    }
+
+    public function delete_product($id)
+    {
+        $data = Product::find($id);
+
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with("message", "Product deleted successfully.");
+        } else {
+            return redirect()->back()->with("error", "Product not found.");
+        }
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $catagory = Category::all();
+        return view('admin.update_product', compact('product', 'catagory'));
+    }
+
+
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found!');
+        }
+
+        $validatedData = $request->validate([
+            'product_name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'discount_price' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'parent_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $product->product_name = $validatedData['product_name'];
+        $product->description = $validatedData['description'];
+        $product->price = $validatedData['price'];
+        $product->discount_price = $validatedData['discount_price'];
+        $product->quantity = $validatedData['quantity'];
+        $product->parent_id = $validatedData['parent_id'];
+
+        if ($request->parent_id != 0 && $request->subcategory_id) {
+            $product->parent_id = $request->subcategory_id;
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('product', $imageName);
+
+            if ($product->image) {
+                $oldImagePath = public_path('product/' . $product->image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $product->image = $imageName;
+        }
+
+        $product->save();
+
+        return redirect()->route('showproduct')->with('message', 'Product updated successfully!');
     }
 }

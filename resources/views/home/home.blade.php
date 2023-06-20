@@ -112,7 +112,7 @@
     <!--? Popular Items Start -->
     <div class="popular-items pt-50">
       <div class="small-tittle mb-20 ml-20">
-        <h2>Description</h2>
+        {{-- <h2>Description</h2> --}}
       </div>
       <div class="container-fluid">
         <div class="row">

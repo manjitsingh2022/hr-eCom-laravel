@@ -21,16 +21,7 @@
    @endif
 
 <div class="div_center">
-    <h2 class="h2_font">Add Catagory</h2>
-
-
-    <form action="{{url('/add_category')}}" method="POST">
-      
-        @csrf
-
-        <input type="text" class="input_color" name="catagory" id="" placeholder="Write  Catagory name">
-         <input type="submit" value="Add Catagory" class="btn btn-primary">
-    </form>
+    <h2 class="h2_font">All Catagories</h2>
 
     <div class="container">
         <table class="table table-bordered table-hover mx-auto w-50 text-center">
@@ -42,12 +33,12 @@
             </thead>
 
             <tbody>
-                @foreach ($data as $catagory)
+                @foreach ($categories as $category)
                     
                 <tr>
-            <td>{{$catagory->catagory_name}}</td>
+            <td>{{$category->category_name}}</td>
                     <td>
-                        <a onclick=" return confirm('Are you Sure to Delete this.')" class="btn btn-danger" href="{{url('delete_catagory',$catagory->id)}}" >Delete</a>
+                        <a onclick=" return confirm('Are you Sure to Delete this.')" class="btn btn-danger" href="{{url('delete_catagory',$category->id)}}" >Delete</a>
                     </td>
                 </tr>
                 @endforeach

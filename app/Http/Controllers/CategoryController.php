@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function view_category()
+    {
+        $categories = Category::all();
+        return view('admin.category', compact('categories'));
+    }
+
+
     public function create()
     {
-        $categories = Category::where('parent_id', 0)->get();
+        $categories = Category::where('parent_id', 0)->where('status', 1)->get();
         return view('admin.categories.create', compact('categories'));
     }
 
@@ -35,7 +42,7 @@ class CategoryController extends Controller
         );
 
         if ($category->wasRecentlyCreated) {
-            return redirect()->route('viewcategory')->with('success', 'Category created successfully.');
+            return redirect()->route('viewcategorylist')->with('success', 'Category created successfully.');
         } else {
             return redirect()->route('viewcategory')->with('error', 'Category already exists. Please choose a different name.');
         }
@@ -47,5 +54,19 @@ class CategoryController extends Controller
     {
         $subcategories = Category::where('parent_id', $request->parentCategoryId)->where('status', 1)->get();
         return response()->json($subcategories);
+    }
+
+
+
+    public function delete_catagory($id)
+    {
+        $data = Category::find($id);
+
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with("message", "Category deleted successfully.");
+        } else {
+            return redirect()->back()->with("error", "Category not found.");
+        }
     }
 }
