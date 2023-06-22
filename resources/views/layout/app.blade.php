@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="{{ asset('public/home/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('public/home/assets/css/custom.css') }}">
 
-    
+@yield('style')
 </head>
 <body class="full-wrapper">
     <!-- ? Preloader Start -->
@@ -56,9 +56,9 @@
 </div>
 <!-- Search model end -->
 <!-- Scroll Up -->
-{{-- <div id="back-top" >
+<div id="back-top" style="margin-bottom:73px" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div> --}}
+</div>
 
 
 

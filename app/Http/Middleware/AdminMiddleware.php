@@ -18,6 +18,8 @@ class AdminMiddleware
     {
         if (session()->has('user_type') && session('user_type') == 1) {
             return $next($request);
+        } else if ($request->route()->getName() === 'logout') {
+            return $next($request);
         } else {
             return redirect('no-access');
         }

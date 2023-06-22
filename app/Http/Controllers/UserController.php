@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Wishlist;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
-
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+
 
     public function index()
     {
@@ -51,9 +57,72 @@ class UserController extends Controller
 
 
 
+    public function wishlistindex()
+    {
+        $user = Auth::user();
+
+        $wishlistItems = $user->wishlist;
+        $wishlist = $wishlistItems->pluck('product_id');
+
+        // Retrieve all products
+        $products = Product::whereIn('id', $wishlist)->get();
 
 
 
+
+        return view('home.wishlist', compact('wishlist', 'products'));
+    }
+
+
+
+
+
+
+
+
+
+    public function addToWishlist(Request $request, $productId)
+    {
+        $user = Auth::user();
+
+        $wishlistItem = Wishlist::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($wishlistItem) {
+            return redirect()->back()->with('flash_message', 'This item is already in your wishlist!');
+        } else {
+            $wishlistItem = new Wishlist();
+            $wishlistItem->user_id = $user->id;
+            $wishlistItem->product_id = $productId;
+            $wishlistItem->quantity = $request->input('quantity');
+            $wishlistItem->save();
+            return redirect()->back()->with('success', 'Item added to wishlist.');
+        }
+    }
+
+
+
+
+
+
+
+
+    // public function removeFromWishlist(Request $request, $productId)
+    // {
+    //     $user = $request->user();
+
+    //     $wishlistItem = Wishlist::where('user_id', $user->id)
+    //         ->where('product_id', $productId)
+    //         ->first();
+
+    //     if ($wishlistItem) {
+    //         $wishlistItem->delete();
+    //     }
+
+    //     // Redirect or return a response
+    //     // ...
+    // }
 
 
 
@@ -66,20 +135,53 @@ class UserController extends Controller
     }
 
 
+    // public function loginPost(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required',
+    //         'password' => 'required'
+    //     ]);
+
+    //     if (Auth::attempt($request->only('email', 'password'))) {
+    //         Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
+    //         return redirect()->route('home');
+    //     }
+
+    //     return redirect()->route('login')->with('error', 'Invalid login credentials');
+    // }
+
+
     public function loginPost(Request $request)
     {
+        $credentials = $request->only('email', 'password');
+
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
-            return redirect()->route('home');
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return redirect()->route('login')->with('login_error', 'Email not found');
         }
 
-        return redirect()->route('login')->with('error', 'Invalid login credentials');
+        if (Auth::attempt($credentials)) {
+            if ($user->email_verified_at !== null) {
+                Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
+                return redirect()->route('home');
+            } else {
+                Auth::logout();
+                return redirect()->route('login')->with('verified', false);
+            }
+        }
+
+        return redirect()->route('login')->with('login_error', 'Invalid password');
     }
+
+
+
+
 
 
 
@@ -106,9 +208,10 @@ class UserController extends Controller
             'usertype' => 0,
             'remember_token' => Str::random(60),
         ]);
+
         $user->save();
         Auth::login($user);
-
+        event(new Registered($user));
         return redirect()->route('login')->with('success', 'Registration successful. You are now logged in!');
     }
 
@@ -119,10 +222,15 @@ class UserController extends Controller
 
 
 
+
     public function logout()
     {
-        Auth::logout();
-        Session::forget('user_id');
-        return redirect()->route('login');
+        if (Auth::check()) {
+            Auth::logout();
+            Session::forget('user_id');
+            Session::forget('user_type');
+        }
+
+        return redirect()->route('login')->with('logout', true);
     }
 }

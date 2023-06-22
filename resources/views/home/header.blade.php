@@ -33,9 +33,15 @@
                                     </li> --}}
                                     <li><a href="{{route('contact')}}">Contact</a></li>
 
-                                    @if(session('user_id'))
+                                    @if(session('user_id') && session('user_type'))
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
+                                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                                    @else
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
+
+                                        <li><a href="{{ route('login') }}">Login</a></li>
                                     @endif
+                                
                                 
 
 

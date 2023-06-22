@@ -9,7 +9,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Contact</a></li> 
+                                <li class="breadcrumb-item"><a href="{{ route('contact') }}">Contact</a></li> 
                             </ol>
                         </nav>
                     </div>
@@ -19,10 +19,7 @@
         <!-- breadcrumb End-->
         <!-- Hero Area End-->
         <!--?  Contact Area start  -->
-        @section('contact')
-
-
-        @endsection
+        
         <section class="contact-section">
             <div class="container">
                 {{-- <div class="d-none d-sm-block mb-5 pb-4">

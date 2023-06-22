@@ -129,9 +129,25 @@
                 </div>
               </div>
             </div>
-            <div class="wish">
-              <i class="fas fa-heart"></i>
-            </div>
+
+            <div class="wish" style="background: none; box-shadow: none;">
+              <form action="{{ route('wishlist.add', $product->id) }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="_method" value="POST"> 
+                  <input name="product_id" type="hidden" value="{{ $product->id }}"> 
+                  
+                  <button type="submit" style="border: none; background:none; cursor: pointer;">
+                      <i class="fas fa-heart"></i>
+                  </button>
+              </form>
+          </div>
+          
+            {{-- <div class="wish">
+              <a href="{{ route('wishlist.add', $product->id) }}" >
+                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" >
+                <i class="fas fa-heart"></i>
+            </a>
+            </div> --}}
           </div>
           @endforeach
          

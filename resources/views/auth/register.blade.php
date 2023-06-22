@@ -49,7 +49,7 @@
                               <input type="checkbox" class="form-check-input"> Remember me
                           </label>
                       </div>
-                      <a href="#" class="forgot-pass">Forgot password</a>
+                      <a href="{{route('password.request')}}" class="forgot-pass">Forgot password</a>
                   </div>
                   <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
