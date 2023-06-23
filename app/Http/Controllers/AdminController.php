@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-
+use App\Models\Settings;
 
 class AdminController extends Controller
 {
@@ -13,4 +13,22 @@ class AdminController extends Controller
         // $products =  Product::all();
         return view('admin.body', compact('categories'));
     }
+
+
+
+
+    // public function settingsCategory()
+    // {
+    //     $settings = Settings::all();
+
+    //     return view('admin.categories.setting', compact('settings'));
+    // }
+
+
+    // public function settingsstore()
+    // {
+    //     $settings = Settings::all();
+
+    //     return view('admin.categories.setting', compact('settings'));
+    // }
 }

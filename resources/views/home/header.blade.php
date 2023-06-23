@@ -12,7 +12,7 @@
                         <!-- Logo -->
                         <div class="logo">
                             <a href="{{route('home')}}"><h1>The Beverly Hills Luxury Boutique</h1></a>
-                            {{-- <a href="{{route('home')}}"><img src="{{asset('home/assets/img/logo/logo.png')}}" alt=""></a> --}}
+                            {{-- <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo.png')}}" alt=""></a> --}}
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu  d-none d-lg-block " >
@@ -33,12 +33,11 @@
                                     </li> --}}
                                     <li><a href="{{route('contact')}}">Contact</a></li>
 
-                                    @if(session('user_id') && session('user_type'))
-                                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                                    
+                                    @if(session('user_id') != "" && session('user_type') != "")
                                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
-                                    @else
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
-
+                                    @else
                                         <li><a href="{{ route('login') }}">Login</a></li>
                                     @endif
                                 

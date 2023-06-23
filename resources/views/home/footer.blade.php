@@ -10,7 +10,7 @@
                       <!-- logo -->
                       <div class="footer-logo mb-35">
                         <h1 style="color:white;">The beverly hills luxury boutique</h1>
-                       {{-- <a href="{{route('home')}}"><img src="{{asset('home/assets/img/logo/logo2_footer.png')}}" alt=""></a> --}}
+                       {{-- <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo2_footer.png')}}" alt=""></a> --}}
                    </div>
                    <div class="footer-tittle">
                        <div class="footer-pera">

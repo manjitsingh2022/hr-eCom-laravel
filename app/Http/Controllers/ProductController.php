@@ -34,9 +34,7 @@ class ProductController extends Controller
             $image->move('product', $imageName);
             $product->image = $imageName;
         }
-
         $product->save();
-
         return redirect()->route('showproduct')->with('message', 'Product added successfully.');
     }
 

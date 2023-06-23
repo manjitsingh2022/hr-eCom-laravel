@@ -3,6 +3,7 @@
 // Important functions 
 
 use App\Models\Category;
+use App\Models\Settings;
 
 if (!function_exists('p')) {
     function p($data)
@@ -35,7 +36,12 @@ if (!function_exists('mainCategory')) {
 }
 
 
-
+// if (!function_exists('settings')) {
+//     function settings()
+//     {
+//         $data = Settings::where('');
+//     }
+// }
 
 
 // if (!function_exists('mainCategory')) {

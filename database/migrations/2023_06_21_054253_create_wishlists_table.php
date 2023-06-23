@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedInteger('quantity')->default(1);
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
             // Add foreign key constraints

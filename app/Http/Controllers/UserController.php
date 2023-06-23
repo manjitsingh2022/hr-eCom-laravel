@@ -7,14 +7,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Wishlist;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
-// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -81,7 +78,7 @@ class UserController extends Controller
 
 
 
-    public function addToWishlist(Request $request, $productId)
+    public function addToWishlist($productId)
     {
         $user = Auth::user();
 
@@ -95,9 +92,12 @@ class UserController extends Controller
             $wishlistItem = new Wishlist();
             $wishlistItem->user_id = $user->id;
             $wishlistItem->product_id = $productId;
-            $wishlistItem->quantity = $request->input('quantity');
-            $wishlistItem->save();
-            return redirect()->back()->with('success', 'Item added to wishlist.');
+
+            $selectedvlaue =   $wishlistItem->save();
+            if ($selectedvlaue) {
+                Product::where('id', $productId)->update(['selected' => 1]);
+                return redirect()->back()->with('success', 'Item added to wishlist.');
+            }
         }
     }
 
@@ -105,24 +105,22 @@ class UserController extends Controller
 
 
 
+    public function removeFromWishlist(Request $request, $productId)
+    {
+        $user = $request->user();
 
+        $wishlistItem = Wishlist::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
 
-
-    // public function removeFromWishlist(Request $request, $productId)
-    // {
-    //     $user = $request->user();
-
-    //     $wishlistItem = Wishlist::where('user_id', $user->id)
-    //         ->where('product_id', $productId)
-    //         ->first();
-
-    //     if ($wishlistItem) {
-    //         $wishlistItem->delete();
-    //     }
-
-    //     // Redirect or return a response
-    //     // ...
-    // }
+        if ($wishlistItem) {
+            $is_deleted =  $wishlistItem->delete();
+            if ($is_deleted) {
+                Product::where('id', $productId)->update(['selected' => 0]);
+            }
+            return redirect()->back()->with('success', 'Item remove to wishlist.');
+        }
+    }
 
 
 
@@ -133,22 +131,6 @@ class UserController extends Controller
     {
         return view('auth.login');
     }
-
-
-    // public function loginPost(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required',
-    //         'password' => 'required'
-    //     ]);
-
-    //     if (Auth::attempt($request->only('email', 'password'))) {
-    //         Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
-    //         return redirect()->route('home');
-    //     }
-
-    //     return redirect()->route('login')->with('error', 'Invalid login credentials');
-    // }
 
 
     public function loginPost(Request $request)
@@ -169,7 +151,11 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             if ($user->email_verified_at !== null) {
                 Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
-                return redirect()->route('home');
+                if ($user->usertype == 1) {
+                    return redirect()->route('dashboard');
+                } else {
+                    return redirect()->route('home');
+                }
             } else {
                 Auth::logout();
                 return redirect()->route('login')->with('verified', false);

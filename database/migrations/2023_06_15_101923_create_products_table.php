@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('price')->nullable();
             $table->string('discount_price')->nullable();
             $table->integer('status')->default(1);
+            $table->integer('selected')->default(0);
             $table->timestamps();
 
 
