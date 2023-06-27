@@ -1,4 +1,6 @@
-
+<?php 
+$settings = settings();
+?>
 <footer>
     <!-- Footer Start-->
     <div class="footer-area footer-padding">
@@ -9,13 +11,13 @@
                    <div class="single-footer-caption mb-30">
                       <!-- logo -->
                       <div class="footer-logo mb-35">
-                        <h1 style="color:white;">The beverly hills luxury boutique</h1>
-                       {{-- <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo2_footer.png')}}" alt=""></a> --}}
+                        {{-- <h1 style="color:white;">The beverly hills luxury boutique</h1> --}}
+                       <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo2_footer.png')}}" alt="" width="180px"></a>
                    </div>
                    <div class="footer-tittle">
                        <div class="footer-pera">
-                           <p>Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</p>
-                       </div>
+                          <p>{{ isset($settings['description']) ? $settings['description'] : 'description' }}</p>
+                        </div>
                    </div>
                    <!-- social -->
                    {{-- <div class="footer-social">
@@ -56,14 +58,16 @@
         </div>
     </div>
    
+   
     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4">
         <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
                 <h4>Get in touch</h4>
                 <ul>
-                    <li><a href="#">(89) 982-278 356</a></li>
-                    <li><a href="#">demo@colorlib.com</a></li>
-                    <li><a href="#">67/A, Colorlib, Green road, NYC</a></li>
+                 
+                    <li><a >{{ isset($settings['phone']) ? $settings['phone'] : 'phone' }}</a></li>
+                    <li><a href="{{route('home')}}">{{ isset($settings['domain']) ? $settings['domain'] : 'domain' }}</a></li>
+                    <li><a >{{ isset($settings['address']) ? $settings['address'] : 'address' }}></li>
                 </ul>
             </div>
         </div>

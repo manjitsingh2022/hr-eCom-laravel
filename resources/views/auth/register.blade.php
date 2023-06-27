@@ -4,7 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>The Beverly Hills Luxury Boutique</title>
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/css/vendor.bundle.base.css')}}">
@@ -16,7 +17,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('public/admin/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{asset('public/admin/assets/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('public/admin/assets/images/favicon.ico')}}" />
   </head>
   <body>
     <div class="container-scroller">
@@ -26,6 +27,22 @@
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Register</h3>
+                @if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
                 <form action="{{ route('registerpost') }}" method="POST">
                   @csrf
                   <div class="form-group">
@@ -52,7 +69,7 @@
                       <a href="{{route('password.request')}}" class="forgot-pass">Forgot password</a>
                   </div>
                   <div class="text-center">
-                      <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                      <button type="submit" class="btn btn-primary btn-block enter-btn">Register</button>
                   </div>
                   {{-- <div class="d-flex">
                       <button class="btn btn-facebook col mr-2">

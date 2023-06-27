@@ -51,10 +51,11 @@ class ProductController extends Controller
 
     public function show_product()
     {
-        $products = Product::all();
+        $products = Product::paginate(5);
 
         return view("admin.show_product", compact('products'));
     }
+
 
     public function delete_product($id)
     {
@@ -86,7 +87,7 @@ class ProductController extends Controller
         }
 
         $validatedData = $request->validate([
-            'product_name' => 'required',
+            'product_name' => 'required|max:255|unique:products,product_name,' . $id,
             'description' => 'required',
             'price' => 'required|numeric',
             'discount_price' => 'required|numeric',
@@ -108,10 +109,10 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = uniqid() . '_' . $image->getClientOriginalName();
             $image->move('product', $imageName);
 
-            if ($product->image) {
+            if ($product->image && $product->image !== $imageName) {
                 $oldImagePath = public_path('product/' . $product->image);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);

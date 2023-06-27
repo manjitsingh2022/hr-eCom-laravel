@@ -12,15 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('settings', function (Blueprint $table) {
+
             $table->id();
-            $table->string('description');
-            $table->string('domain');
-            $table->unsignedBigInteger('user_id');
+            $table->string('setting_key');
+            $table->string('setting_value');
             $table->timestamps();
-
-
-            // Add foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

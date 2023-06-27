@@ -1,5 +1,7 @@
 @extends('layout.app')
-
+@section('title')
+The Beverly Hills Luxury Boutique
+@endsection
 <style>
   .wish {
     position: absolute;
@@ -18,16 +20,33 @@
 
  
 
+
+
   .productimage {
-    width: 100%;
-    max-height: 320px;
-    width: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+    min-height: 100%;
+    max-height: 350px;
+  border-radius: 5px;
+}
+
 </style>
 
 @section('content')
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <main>
   <!-- Popular Items Start -->
   <div class="popular-items pt-50">
@@ -42,7 +61,7 @@
                 <span>{{$product->product_name}}</span>
               </div>
               <div class="favorit-items">
-                <a href="{{ route('contact') }}" class="btn">Shop Now</a>
+                <a href="{{ route('contact')}}" class="btn">Shop Now</a>
               </div>
             </div>
           </div>
@@ -53,7 +72,7 @@
               <input type="hidden" name="_method" value="POST"> 
               <input name="product_id" type="hidden" value="{{ $product->id }}"> 
               <button type="submit" style="border: none; cursor: pointer;" class="wish">
-                <i class="fas fa-heart" style="color: {{ $product->selected ? 'red' : 'gray' }}"></i>
+                <i class="fas fa-heart" style="color: {{ in_array($product->id,$wishlist) ? 'red' : 'gray' }}"></i>
               </button>
             </form>
           </div>
@@ -71,7 +90,7 @@
         <div class="col-xl-7 col-lg-9">
           <div class="single-question text-center">
             <h2 class="wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s">collection houses our first-ever</h2>
-            <a href="about.html" class="btn class=" wow fadeInUp" data-wow-duration="2s" data-wow-delay=".4s">About Us</a>
+            {{-- <a href="about.html" class="btn class=" wow fadeInUp" data-wow-duration="2s" data-wow-delay=".4s">About Us</a> --}}
           </div>
         </div>
       </div>
@@ -89,8 +108,8 @@
               <img src="{{ asset('public/home/assets/img/gallery/popular-imtes1.png') }}" alt="">
             </div>
             <div class="location-details">
-              <p><a href="product_details.html">Established fact that by the<br> readable content</a></p>
-              <a href="product_details.html" class="btn">Read More</a>
+              {{-- <p><a href="product_details.html">Established fact that by the<br> readable content</a></p> --}}
+              {{-- <a href="product_details.html" class="btn">Read More</a> --}}
             </div>
           </div>
         </div>
@@ -100,8 +119,8 @@
               <img src="{{ asset('public/home/assets/img/gallery/popular-imtes2.png') }}" alt="">
             </div>
             <div class="location-details">
-              <p><a href="product_details.html">Established fact that by the<br> readable content</a></p>
-              <a href="product_details.html" class="btn">Read More</a>
+              {{-- <p><a href="product_details.html">Established fact that by the<br> readable content</a></p> --}}
+              {{-- <a href="product_details.html" class="btn">Read More</a> --}}
             </div>
           </div>
         </div>
@@ -111,7 +130,7 @@
   <!-- Popular Locations End -->
 
   <!-- Services Area Start -->
-  <div class="categories-area section-padding40 gray-bg">
+  {{-- <div class="categories-area section-padding40 gray-bg">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -160,7 +179,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- Services Area End -->
 </main>
 @endsection

@@ -1,5 +1,9 @@
 @extends('admin.home')
 
+@section('title')
+Show Products
+@endsection
+
 @section('style')
   <style type="text/css">
     table {
@@ -39,15 +43,23 @@
     .btn-edit:hover {
         background-color: #218838;
     }
+
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 @endsection
 
 @section('content')
-<h1 >All Products</h1>
-<table >
-   
+<h1>All Products</h1>
+<table>
+    <!-- Table header -->
     <thead>
+        <!-- Header row -->
         <tr>
+            <!-- Table headings -->
             <th>Product Name</th>
             <th>Description</th>
             <th>Image</th>
@@ -60,12 +72,14 @@
         </tr>
     </thead>
     <tbody>
+        <!-- Table rows -->
         @foreach($products as $product)
         <tr>
+            <!-- Table data -->
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->description }}</td>
-            <td><img src="{{ asset('product/' . $product->image) }}" alt="Product Image" style="width: 100px; height: 100px; border-radius: 0;"></td>
-            <td>{{ $product->catagory }}</td>
+            <td><img src="{{ asset('product/' . $product->image) }}" alt="Product Image" class="product-image"></td>
+            <td>{{ $product->category }}</td>
             <td>{{ $product->quantity }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->discount_price }}</td>
@@ -75,4 +89,24 @@
         @endforeach
     </tbody>
 </table>
+<!-- Customized pagination links -->
+<div class="pagination">
+    <div>
+        <!-- Previous page link -->
+        @if ($products->onFirstPage())
+            <span class="disabled">&laquo; Previous</span>
+        @else
+            <a href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
+        @endif
+    </div>
+    <div>
+        Page {{ $products->currentPage() }} of {{ $products->lastPage() }}
+        @if ($products->hasMorePages())
+            <a href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+        @else
+            <span class="disabled">Next &raquo;</span>
+        @endif
+    </div>
+</div>
+
 @endsection

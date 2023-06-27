@@ -1,5 +1,7 @@
 @extends('admin.home')
-
+@section('title')
+Update Product
+@endsection
 @section('style')
 <style type="text/css">
     .div_center {

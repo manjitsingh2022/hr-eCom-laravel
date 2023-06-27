@@ -1,4 +1,5 @@
 @extends('admin.home')
+
 @section('style')
 <style type="text/css">
   .processing-icon {
@@ -14,16 +15,31 @@
 </style>
 @endsection
 @section('content')
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
+</div>
+@endif
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <!-- content-wrapper Start -->
-<div class="row">
+{{-- <div class="row">
   <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="row">
           <div class="col-9">
             <div class="d-flex align-items-center align-self-start">
-              {{-- <h3 class="mb-0"> {{$total_product}}</h3> --}}
+              <h3 class="mb-0"> {{$total_product}}</h3>
             </div>
           </div>
           <div class="col-3">
@@ -42,7 +58,7 @@
         <div class="row">
           <div class="col-9">
             <div class="d-flex align-items-center align-self-start">
-              {{-- <h3 class="mb-0">{{$total_order}}</h3> --}}
+              <h3 class="mb-0">{{$total_order}}</h3>
             </div>
           </div>
           <div class="col-3">
@@ -61,7 +77,7 @@
         <div class="row">
           <div class="col-9">
             <div class="d-flex align-items-center align-self-start">
-              {{-- <h3 class="mb-0">{{$total_user}}</h3> --}}
+              <h3 class="mb-0">{{$total_user}}</h3>
             </div>
           </div>
           <div class="col-3">
@@ -80,7 +96,7 @@
         <div class="row">
           <div class="col-9">
             <div class="d-flex align-items-center align-self-start">
-              {{-- <h3 class="mb-0"></h3> --}}
+              <h3 class="mb-0"></h3>
             </div>
           </div>
           <div class="col-3">
@@ -99,7 +115,7 @@
         <div class="row">
           <div class="col-9">
             <div class="d-flex align-items-center align-self-start">
-              {{-- <h3 class="mb-0">{{$total_delivered}}</h3> --}}
+              <h3 class="mb-0">{{$total_delivered}}</h3>
             </div>
           </div>
           <div class="col-3">
@@ -136,7 +152,7 @@
 
 
 
-</div>
+</div> --}}
 <div class="stretch-card">
   <div class="card">
     <div class="card-body">
@@ -148,31 +164,32 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Parent ID</th>
+              <th>Parent Category Name</th>
               <th>Category Name</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($categories as $category)
-            <tr class="table-success">
-              <td>{{$category->id}}</td>
-              <td>{{$category->parent_id}}</td>
-              <td>{{$category->category_name}}</td>
-              <td>{{$category->status}}</td>
-            </tr>
-            @if ($category->subcategories->count() > 0)
-            @foreach ($category->subcategories as $subcategory)
-            <tr class="table-danger">
-              <td>{{$subcategory->id}}</td>
-              <td>{{$category->id}}</td>
-              <td>{{$subcategory->category_name}}</td>
-              <td>{{$subcategory->status}}</td>
-            </tr>
+                <tr >
+                    <td>{{ $category->id }}</td>
+                    <td>{{ $category->parent_id ? $category->parent->category_name : '' }}</td>
+                    <td>{{ $category->category_name }}</td>
+                    <td>{{ $category->status }}</td>
+                </tr>
+                @if ($category->subcategories->count() > 0)
+                    @foreach ($category->subcategories as $subcategory)
+                        <tr >
+                            <td>{{ $subcategory->id }}</td>
+                            <td>{{ $category->category_name }}</td>
+                            <td>{{ $subcategory->category_name }}</td>
+                            <td>{{ $subcategory->status }}</td>
+                        </tr>
+                    @endforeach
+                @endif
             @endforeach
-            @endif
-            @endforeach
-          </tbody>
+        </tbody>
+        
         </table>
 
       </div>

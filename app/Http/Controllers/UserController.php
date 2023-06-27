@@ -21,9 +21,15 @@ class UserController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id', 0)->get();
-
         $products = Product::all();
-        return view('home.home', compact('categories', 'products'));
+        $wishlist = [];
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id')->toArray();
+        }
+
+        return view('home.home', compact('categories', 'products', 'wishlist'));
     }
 
     public function contact()
@@ -56,19 +62,18 @@ class UserController extends Controller
 
     public function wishlistindex()
     {
-        $user = Auth::user();
+        $wishlist = [];
+        $products = [];
 
-        $wishlistItems = $user->wishlist;
-        $wishlist = $wishlistItems->pluck('product_id');
-
-        // Retrieve all products
-        $products = Product::whereIn('id', $wishlist)->get();
-
-
-
+        if (Auth::check()) {
+            $user = Auth::user();
+            $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id')->toArray();
+            $products = Product::whereIn('id', $wishlist)->get();
+        }
 
         return view('home.wishlist', compact('wishlist', 'products'));
     }
+
 
 
 
@@ -95,7 +100,6 @@ class UserController extends Controller
 
             $selectedvlaue =   $wishlistItem->save();
             if ($selectedvlaue) {
-                Product::where('id', $productId)->update(['selected' => 1]);
                 return redirect()->back()->with('success', 'Item added to wishlist.');
             }
         }
@@ -113,18 +117,11 @@ class UserController extends Controller
             ->where('product_id', $productId)
             ->first();
 
-        if ($wishlistItem) {
-            $is_deleted =  $wishlistItem->delete();
-            if ($is_deleted) {
-                Product::where('id', $productId)->update(['selected' => 0]);
-            }
-            return redirect()->back()->with('success', 'Item remove to wishlist.');
-        }
+
+        $wishlistItem->delete();
+
+        return redirect()->back()->with('success', 'Item remove to wishlist.');
     }
-
-
-
-
 
 
     public function login()
@@ -133,9 +130,13 @@ class UserController extends Controller
     }
 
 
+
+
     public function loginPost(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+
 
         $request->validate([
             'email' => 'required|email',
@@ -151,8 +152,11 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             if ($user->email_verified_at !== null) {
                 Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
-                if ($user->usertype == 1) {
+                if ($user->usertype === 1) {
                     return redirect()->route('dashboard');
+                }
+                if ($user->usertype === 0) {
+                    return redirect()->route('home');
                 } else {
                     return redirect()->route('home');
                 }
@@ -179,8 +183,6 @@ class UserController extends Controller
 
     public function registerPost(Request $request)
     {
-
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -198,8 +200,20 @@ class UserController extends Controller
         $user->save();
         Auth::login($user);
         event(new Registered($user));
-        return redirect()->route('login')->with('success', 'Registration successful. You are now logged in!');
+
+        if ($user->email_verified_at !== null) {
+            Session::put(['user_id' => $user->id, 'user_type' => $user->usertype, 'email_verified_at' => $user->email_verified_at]);
+
+            if ($user->usertype == 0) {
+                return redirect()->route('home');
+            }
+        }
+
+        return redirect()->route('login')->with('verified', false);
     }
+
+
+
 
 
 

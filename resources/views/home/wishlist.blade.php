@@ -1,4 +1,7 @@
 @extends('layout.app')
+@section('title')
+wishlist
+@endsection
 @section('style')
 <style>
     .wish {
@@ -22,18 +25,32 @@
 }
 
 
-    .productimage {
-    width: 100%;
-    max-height: 320px;
-    width: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+ 
+.productimage {
+    max-height: 350px;
+  border-radius: 5px;
+}
   </style>
 
 @endsection
 
 @section('content')
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     <main>
         <!-- breadcrumb Start-->
         <div class="page-notification page-notification2">
@@ -77,7 +94,7 @@
                                   <input type="hidden" name="_method" value="POST"> 
                                   <input name="product_id" type="hidden" value="{{ $product->id }}"> 
                                   <button type="submit" style="border: none; cursor: pointer;" class="wish">
-                                    <i class="fas fa-heart" style="color: {{ $product->selected==1 ? 'red' : 'gray' }}"></i>
+                                    <i class="fas fa-heart" style="color: {{ in_array($product->id,$wishlist) ? 'red' : 'gray' }}"></i>
                                   </button>
                                 </form>
                               </div>

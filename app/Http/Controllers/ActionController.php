@@ -22,10 +22,8 @@ class ActionController extends Controller
 
     public function verifyemailhash(EmailVerificationRequest $request)
     {
-
         $request->fulfill();
-
-        return redirect('/');
+        return redirect()->route('login');
     }
 
 

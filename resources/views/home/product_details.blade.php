@@ -1,4 +1,7 @@
 @extends('layout.app')
+@section('title')
+Product Details
+@endsection
 @section('style')
 <style>
     .wish {
@@ -19,19 +22,32 @@
   
   
   
+ 
     .productimage {
-    width: 100%;
-    max-height: 320px;
-    width: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+    max-height: 350px;
+  border-radius: 5px;
+}
   </style>
 
 @endsection
 @section('content')
 
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
+</div>
+@endif
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 
   <div class="popular-items pt-50">
@@ -69,9 +85,10 @@
                       </div>
                 </div>
                 @empty
-                <div class="col-md-12 text-center">
-                    <p class="card-text">No products available.</p>
-                </div>
+                <div class="col-md-12 text-center" style="padding-bottom: 200px; display: flex; justify-content: center; align-items: center;">
+                  <p class="card-text">No products available.</p>
+              </div>
+              
             @endforelse
         </div>
     </div>

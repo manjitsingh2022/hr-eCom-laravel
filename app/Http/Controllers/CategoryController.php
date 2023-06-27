@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function view_category()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('admin.category', compact('categories'));
     }
 
@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function storeCatgory(Request $request)
     {
         $validatedData = $request->validate([
-            'category_name' => 'required|string|max:255',
+            'category_name' => 'required|string|max:255|unique:categories',
             'parent_id' => 'nullable|exists:categories,id',
             'status' => 'nullable|integer'
         ]);
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         );
 
         if ($category->wasRecentlyCreated) {
-            return redirect()->route('viewcategorylist')->with('success', 'Category created successfully.');
+            return redirect()->route('viewcategorylist')->with('message', 'Category created successfully.');
         } else {
             return redirect()->route('viewcategory')->with('error', 'Category already exists. Please choose a different name.');
         }
@@ -55,6 +55,41 @@ class CategoryController extends Controller
         $subcategories = Category::where('parent_id', $request->parentCategoryId)->where('status', 1)->get();
         return response()->json($subcategories);
     }
+
+
+
+    public function edit(Category $category)
+    {
+        return view('admin.category_update', compact('category'));
+    }
+
+
+
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'category_name' => 'required|max:255|unique:categories,category_name,' . $category->id,
+        ]);
+
+        $category->update([
+            'category_name' => $request->input('category_name')
+        ]);
+
+        return redirect()->route('viewcategorylist')->with('message', 'Category name updated successfully');
+    }
+
+
+
+
+
+    // public function destroy(Category $category)
+    // {
+    //     // Logic to delete the category
+    //     $category->delete();
+
+    //     return redirect()->back()->with('success', 'Category deleted successfully');
+    // }
+
 
 
 

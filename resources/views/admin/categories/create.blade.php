@@ -1,6 +1,9 @@
 <!-- resources/views/categories/create.blade.php -->
 
 @extends('admin.home')
+@section('title')
+Category Create
+@endsection
 @section('style')
 <style type="text/css">
 
@@ -8,15 +11,20 @@
 @endsection
 @section('content')
 
-@if (session('error'))
-<div class="alert alert-danger">
-  {{ session('error') }}
+@if (session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session()->get('message') }}
 </div>
 @endif
 
-@if (session('success'))
-<div class="alert alert-success">
-  {{ session('success') }}
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
 </div>
 @endif
 
@@ -41,33 +49,7 @@
   </select>
 </div>
 
-{{-- <div class="form-group">
-  <label for="subcategory_id">Sub Category</label>
-  <select name="subcategory_id" id="subcategory_id" class="form-control">
-    <option value="">Select Subcategory</option>
-    @foreach($categories as $category)
-      <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-      @if($category->subcategories->count() > 0)
-        @foreach($category->subcategories as $subcategory)
-          <option value="{{ $subcategory->id }}">- {{ $subcategory->category_name }}</option>
-        @endforeach
-      @endif
-    @endforeach
-  </select>
-</div> --}}
 
-
-{{-- <div class="form-group">
-  <label for="parent_id">Parent Category:</label>
-  <select name="parent_id" id="parent_id" class="form-control" required>
-      <option value="">Select Parent Category</option>
-      @foreach ($categories as $category)
-      <option value="{{ $category->id }}">
-          {{ $category->category_name }}
-      </option>
-      @endforeach
-  </select>
-</div> --}}
 <div class="form-group" id="hidesubcategory">
   <label for="subcategory">Sub Category:</label>
   <select name="subcategory_id" id="subcategory" class="form-control" >

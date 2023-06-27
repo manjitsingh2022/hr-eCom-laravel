@@ -4,7 +4,7 @@
   <base href="public/">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>The Beverly Hills Luxury Boutique</title>
+    <title> @yield('title')</title>
     <meta name="description" content="">
     <meta name="csrf-token" content="your-csrf-token-value">
     <meta name="viewport" content="width=device-width, initial-scale=1">

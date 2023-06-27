@@ -7,54 +7,38 @@
             <div class="container-fluid" >
                 <div class=" menu-wrapper d-flex align-items-center justify-content-around"  >
 
-                    <div class="header-left d-flex align-items-center">
+                    <div class="header-left d-flex align-items-center" style="justify-content: space-between;
+                    flex: auto;">
 
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="{{route('home')}}"><h1>The Beverly Hills Luxury Boutique</h1></a>
-                            {{-- <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo.png')}}" alt=""></a> --}}
+                            <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo.png')}}" alt="" width="60px"></a>
                         </div>
                         <!-- Main-menu -->
-                        <div class="main-menu  d-none d-lg-block " >
+                        <div class="main-menu  d-none d-lg-block "  >
                             
                             <nav>
 
                                 <ul id="navigation">
                                     <li><a href="{{route('home')}}">Home</a></li> 
-                                    {{-- <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">About</a></li> --}}
-                                    {{-- <li><a href="blog.html">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog_details.html">Blog Details</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
-                                            <li><a href="product_details.html">Product Details</a></li>
-                                        </ul>
-                                    </li> --}}
                                     <li><a href="{{route('contact')}}">Contact</a></li>
-
                                     
                                     @if(session('user_id') != "" && session('user_type') != "")
                                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
                                     @else
+                                   
                                         <li><a href="{{ route('login') }}">Login</a></li>
+                                       {{-- <li><a href="{{ route('logout') }}">Logout</a></li> --}}
+
                                     @endif
-                                
-                                
 
 
                                 </ul>
                             </nav>
                         </div>   
                     </div>
-                    {{-- <div class="header-right1 d-flex align-items-center">
-                        <!-- Social -->
-                        <div class="header-social d-none d-md-block">
-                            
-                        </div>
-
-                    </div> --}}
+                   
 
                     
                     <!-- Mobile Menu -->
@@ -69,7 +53,7 @@
                 <div class="menu-wrapper d-flex align-items-center justify-content-between">
                     <div class="header-left d-flex align-items-center">
                         <!-- Main-menu -->
-                        <div class="main-menu  d-none d-lg-block">
+                        <div class="main-menu  d-none d-lg-block" style="margin-left: -7px">
                             <nav>
                                 <ul id="navigation">
                                     @foreach(mainCategory() as $category)
