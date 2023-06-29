@@ -44,8 +44,10 @@ Route::get('category/{category}/{categoryname}', [UserController::class, 'showda
 
 
 
-
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/password-change', [UserController::class, 'showPasswordChangeForm'])->name('password.change');
+    Route::post('/password-change', [UserController::class, 'passwordChange'])->name('password.change.submit');
+
     Route::post('wishlist/add/{product}', [UserController::class, 'addToWishlist'])->name('wishlist.add');
     Route::get('wishlist', [UserController::class, 'wishlistindex'])->name('wishlist');
     Route::post('wishlist/remove/{product}', [UserController::class, 'removeFromWishlist'])->name('wishlist.remove');

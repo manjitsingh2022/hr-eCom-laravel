@@ -24,6 +24,9 @@ Category Updated
 @endsection
 
 @section('content')
+<div class="card">
+
+
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -31,7 +34,7 @@ Category Updated
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -59,6 +62,7 @@ Category Updated
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 

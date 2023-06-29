@@ -45,13 +45,19 @@ class UserController extends Controller
     {
 
         $categories = Category::find($category);
+        $wishlist = [];
 
+        if (Auth::check()) {
+            $user = Auth::user();
+            $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id')->toArray();
+            $products = Product::whereIn('id', $wishlist)->get();
+        }
 
         if (!empty($categories)) {
             $products = Product::where('parent_id', $categories->id)->get();
 
 
-            return view('home.product_details', compact('categories', 'products',));
+            return view('home.product_details', compact('categories', 'products', 'wishlist'));
         }
 
         return abort(404);
@@ -100,7 +106,7 @@ class UserController extends Controller
 
             $selectedvlaue =   $wishlistItem->save();
             if ($selectedvlaue) {
-                return redirect()->back()->with('success', 'Item added to wishlist.');
+                return redirect()->back()->with('message', 'Item added to wishlist.');
             }
         }
     }
@@ -120,8 +126,42 @@ class UserController extends Controller
 
         $wishlistItem->delete();
 
-        return redirect()->back()->with('success', 'Item remove to wishlist.');
+        return redirect()->back()->with('message', 'Item remove to wishlist.');
     }
+
+
+
+
+
+
+
+    public function showPasswordChangeForm()
+    {
+        return view('auth.reset-password-copy');
+    }
+
+    public function passwordChange(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+        $user = Auth::user();
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            if ($user->usertype === 1) {
+                return redirect()->route('dashboard')->with('message', 'Password changed successfully.');
+            } else {
+                return redirect()->route('home')->with('message', 'Password changed successfully.');
+            }
+        }
+        return redirect()->back()->withErrors(['current_password' => 'Incorrect current password.']);
+    }
+
+
+
 
 
     public function login()
@@ -135,8 +175,6 @@ class UserController extends Controller
     public function loginPost(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-
 
         $request->validate([
             'email' => 'required|email',
@@ -153,21 +191,20 @@ class UserController extends Controller
             if ($user->email_verified_at !== null) {
                 Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
                 if ($user->usertype === 1) {
-                    return redirect()->route('dashboard');
+                    return redirect()->route('dashboard')->with('message', 'Login successful');
                 }
                 if ($user->usertype === 0) {
-                    return redirect()->route('home');
-                } else {
-                    return redirect()->route('home');
+                    return redirect()->route('home')->with('message', 'Login successful');
                 }
             } else {
                 Auth::logout();
-                return redirect()->route('login')->with('verified', false);
+                return redirect()->route('login')->with('verified', false)->with('login_error', 'User not verified');
             }
         }
 
-        return redirect()->route('login')->with('login_error', 'Invalid password');
+        return redirect()->route('login')->with('errors', 'Invalid password');
     }
+
 
 
 

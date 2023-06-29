@@ -20,6 +20,9 @@ Category Lists
     </style>
 @endsection
 @section('content')
+<div class="card">
+
+
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -27,7 +30,7 @@ Category Lists
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -45,7 +48,8 @@ Category Lists
             <thead>
                 <tr>
                     <th>Category Name</th>
-                    <th>Action</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -53,9 +57,17 @@ Category Lists
                 @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->category_name }}</td>
-                    <td>
-                        <a href="{{ route('edit_category', $category->id) }}" class="btn btn-primary">Edit</a>
-                        <a onclick="return confirm('Are you sure you want to delete this category?')" href="{{ route('delete_category', $category->id) }}" class="btn btn-danger">Delete</a>
+                   
+                    <td> 
+                        <a class="nav-link"href="{{ route('edit_category', $category->id) }}">
+                        <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                        </a>
+                    </td>
+                               
+                    <td> 
+                            <a class="nav-link"onclick="return confirm('Are you sure you want to delete this category?')" href="{{ route('delete_category', $category->id) }}">
+                                    <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" >Delete</button>
+                            </a>
                     </td>
                 </tr>
                 @endforeach
@@ -63,7 +75,7 @@ Category Lists
         </table>
 
         <!-- Customized pagination links -->
-<div class="pagination">
+<div class="pagination mt-5 mb-5 " style="justify-content: space-evenly;">
     <div>
         <!-- Previous page link -->
         @if ($categories->onFirstPage())
@@ -85,6 +97,6 @@ Category Lists
 </div>
 
 
-
+</div>
 @endsection
 

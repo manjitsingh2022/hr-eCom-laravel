@@ -49,16 +49,22 @@ Show Products
         justify-content: space-between;
         align-items: center;
     }
+    .div_center {
+        text-align: center;
+      }
 </style>
 @endsection
 
 @section('content')
-<h1>All Products</h1>
-<table>
+<div class="card px-5">
+    
+<h1 class="div_center">All Products</h1>
+<table class="text-center w-100  ">
+    {{-- table table-bordered table-hover mx-auto w-50 --}}
     <!-- Table header -->
-    <thead>
+    <thead style="text-align-last: center;">
         <!-- Header row -->
-        <tr>
+        <tr >
             <!-- Table headings -->
             <th>Product Name</th>
             <th>Description</th>
@@ -67,30 +73,36 @@ Show Products
             <th>Quantity</th>
             <th>Price</th>
             <th>Discount Price</th>
-            <th class="text-danger">Delete</th>
             <th>Edit</th>
+            <th class="text-danger">Delete</th>
         </tr>
     </thead>
     <tbody>
         <!-- Table rows -->
         @foreach($products as $product)
+       
         <tr>
             <!-- Table data -->
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->description }}</td>
             <td><img src="{{ asset('product/' . $product->image) }}" alt="Product Image" class="product-image"></td>
-            <td>{{ $product->category }}</td>
+            <td>{{ $product->category->category_name }}</td>
             <td>{{ $product->quantity }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->discount_price }}</td>
-            <td><a class="btn btn-danger" onclick="return confirm('Are you sure to delete this?')" href="{{ route('product.delete', ['id' => $product->id]) }}">Delete</a></td>
-            <td><a class="btn btn-success" href="{{ route('product.edit', ['id' => $product->id]) }}">Edit</a></td>
+          
+   <td> <a class="nav-link"href="{{ route('product.edit', ['id' => $product->id]) }}">
+    <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+    </a></td>
+            <td> <a class="nav-link" onclick="return confirm('Are you sure to delete this?')" href="{{ route('product.delete', ['id' => $product->id]) }}">
+                <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" >Delete</button>
+        </a></td>
         </tr>
         @endforeach
     </tbody>
 </table>
 <!-- Customized pagination links -->
-<div class="pagination">
+<div class="pagination mb-4 mt-4">
     <div>
         <!-- Previous page link -->
         @if ($products->onFirstPage())
@@ -108,5 +120,5 @@ Show Products
         @endif
     </div>
 </div>
-
+</div>
 @endsection

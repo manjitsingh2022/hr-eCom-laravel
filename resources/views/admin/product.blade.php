@@ -28,6 +28,7 @@ Add Product
 @endsection
 
 @section('content')
+<div class="card"> 
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -35,8 +36,11 @@ Add Product
 </div>
 @endif
 
+
 <div class="div_center">
-  <h1 class="display-4">Add Product</h1>
+  <h1>Add Product</h1>
+</div>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3">
@@ -83,7 +87,7 @@ Add Product
             <label for="image" class="form-label">Product Image:</label>
             <input type="file" name="image" id="image" class="form-control" required />
           </div>
-          <div class="mb-3">
+          <div class="mb-5 div_center">
             <input type="submit" value="Submit" class="btn btn-primary" />
           </div>
         </form>

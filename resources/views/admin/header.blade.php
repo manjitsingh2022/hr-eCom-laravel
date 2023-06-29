@@ -1,7 +1,7 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row">
   <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
       <a class="navbar-brand brand-logo-mini" href="{{ url('index') }}">
-          <img src="{{ asset('admin/assets/images/logo-mini.svg') }}" alt="logo" />
+          <img src="{{ asset('public/admin/assets/images/logo-mini.svg') }}" alt="logo" />
       </a>
   </div>
   <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -76,7 +76,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                       <div class="preview-thumbnail">
-                          <img src="{{ asset('admin/assets/images/faces/face4.jpg') }}" alt="image"
+                          <img src="{{ asset('public/admin/assets/images/faces/face4.jpg') }}" alt="image"
                               class="rounded-circle profile-pic">
                       </div>
                       <div class="preview-item-content">
@@ -87,7 +87,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                       <div class="preview-thumbnail">
-                          <img src="{{ asset('admin/assets/images/faces/face2.jpg') }}" alt="image"
+                          <img src="{{ asset('public/admin/assets/images/faces/face2.jpg') }}" alt="image"
                               class="rounded-circle profile-pic">
                       </div>
                       <div class="preview-item-content">
@@ -98,7 +98,7 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                       <div class="preview-thumbnail">
-                          <img src="{{ asset('admin/assets/images/faces/face3.jpg') }}" alt="image"
+                          <img src="{{ asset('public/admin/assets/images/faces/face3.jpg') }}" alt="image"
                               class="rounded-circle profile-pic">
                       </div>
                       <div class="preview-item-content">

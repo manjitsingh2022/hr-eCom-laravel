@@ -1,6 +1,7 @@
 <?php 
 $settings = settings();
 ?>
+ </main>
 <footer>
     <!-- Footer Start-->
     <div class="footer-area footer-padding">
@@ -38,9 +39,18 @@ $settings = settings();
                     <li><a href="#">Suit</a></li>
                     <li><a href="#">Dresses</a></li>
                 </ul> --}}
+            
                 @foreach(mainCategory() as $category)
-                    <a href="{{ route('category.show', ['category' => $category->id ,'categoryname' => strtolower($category->category_name)]) }}">{{ $category->category_name }}</a> <br>
-                    {{-- @if($category->subcategories->count() > 0) --}}
+                <div class="mb-4">
+                    <ul>
+                        <li>
+                            <a href="{{ route('category.show', ['category' => $category->id, 'categoryname' => strtolower($category->category_name)]) }}">
+                                {{ ucfirst(strtolower($category->category_name)) }}
+                            </a> 
+                        </li>
+                    </ul>
+                </div>
+                                    {{-- @if($category->subcategories->count() > 0) --}}
                     
                         {{-- <ul class="submenu">
                             @foreach($category->subcategories as $subcategory)
@@ -65,10 +75,10 @@ $settings = settings();
                 <h4>Get in touch</h4>
                 <ul>
                  
-                    <li><a >{{ isset($settings['phone']) ? $settings['phone'] : 'phone' }}</a></li>
+                 
+                    <li><a style="text-decoration:none">{{ isset($settings['phone']) ? $settings['phone'] : 'phone' }}</a></li>
                     <li><a href="{{route('home')}}">{{ isset($settings['domain']) ? $settings['domain'] : 'domain' }}</a></li>
-                    <li><a >{{ isset($settings['address']) ? $settings['address'] : 'address' }}></li>
-                </ul>
+                    <li><a style="text-decoration:none" >{{ isset($settings['address']) ? $settings['address'] : 'address' }}></li>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ Settings
 @endsection
 
 @section('content')
+<div class="card px-5 ">
 
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -28,7 +29,7 @@ Settings
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -40,8 +41,8 @@ Settings
 
 
 <div class="row justify-content-center">
-  <div class="col-md-6">
-      <h1>Settings</h1>
+  <div class="col-md-6 mt-4">
+      <h1 >Settings</h1>
         <form action="{{ route('settings.store') }}" method="POST">
             @csrf
 
@@ -60,8 +61,8 @@ Settings
     </div>
 
 
-    <div class="col-md-12">
-      <div class="mt-5">
+    <div class="col-md-12 py-4">
+      <div class="mt-5 ">
         <h4>Settings List</h4>
       </div>
       <table>
@@ -69,7 +70,8 @@ Settings
             <tr>
                 <th style="background-color: rgb(153, 152, 152);">Key</th>
                 <th style="background-color:  rgb(153, 152, 152);">Value</th>
-                <th style="background-color: rgb(153, 152, 152); ">Actions</th>
+                <th style="background-color: rgb(153, 152, 152); ">Edit</th>
+                <th style="background-color: rgb(153, 152, 152); ">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -77,16 +79,22 @@ Settings
             <tr>
                 <td>{{ $setting->setting_key }}</td>
                 <td>{{ $setting->setting_value }}</td>
-                <td  class="d-flex">
+                <td> 
+                    <a class="nav-link"href="{{ route('settings.edit', $setting->id) }}">
+                    <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                    </a>
+                </td>
+                <td> 
                     <form action="{{ route('settings.destroy', $setting->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this setting?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm">Delete</button>
                     </form>
-                    <a href="{{ route('settings.edit', $setting->id) }}"
-                        class="btn btn-primary ml-2">Edit</a>
-                </td>
+             </td>
+                
+
+                
             </tr>
             @endforeach
         </tbody>
@@ -96,5 +104,6 @@ Settings
 
 
  
-
+  
+</div>
 @endsection

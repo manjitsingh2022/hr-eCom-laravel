@@ -23,8 +23,8 @@ Product Details
   
   
  
-    .productimage {
-    max-height: 350px;
+    .product_image {
+  height: 400px;
   border-radius: 5px;
 }
   </style>
@@ -39,7 +39,7 @@ Product Details
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -63,7 +63,7 @@ Product Details
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-popular-items mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
                         <div class="popular-img">
-                            <img src="{{ asset('product/' . $product->image) }}" alt="" class="productimage">
+                            <img src="{{ asset('product/' . $product->image) }}" alt="" class="product_image">
                             <div class="img-cap">
                                 <span>{{ $product->product_name }}</span>
                             </div>
@@ -79,7 +79,7 @@ Product Details
                           <input type="hidden" name="_method" value="POST"> 
                           <input name="product_id" type="hidden" value="{{ $product->id }}"> 
                           <button type="submit" style="border: none; cursor: pointer;" class="wish ">
-                            <i class="fas fa-heart" style="color: {{ $product->selected ? 'red' : 'gray' }}"></i>
+                            <i class="fas fa-heart"  style="color: {{ in_array($product->id,$wishlist) ? 'red' : 'gray' }}"></i>
                           </button>
                         </form>
                       </div>

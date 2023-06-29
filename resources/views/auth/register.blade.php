@@ -26,15 +26,14 @@
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
-                <h3 class="card-title text-left mb-3">Register</h3>
+                <h3 class="card-title text-center mb-3">Register</h3>
                 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     {{ session()->get('message') }}
 </div>
 @endif
-
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -79,7 +78,7 @@
                           <i class="mdi mdi-google-plus"></i> Google plus
                       </button>
                   </div> --}}
-                  <p class="sign-up text-center">Already have an Account?<a href="{{ route('login') }}"> Sign Up</a></p>
+                  <p class="sign-up text-center">Already have an Account?<a href="{{ route('login') }}"> Sign In</a></p>
                   {{-- <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p> --}}
               </form>
               

@@ -15,6 +15,10 @@
 </style>
 @endsection
 @section('content')
+<div class="card">
+
+
+
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -22,7 +26,7 @@
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -157,8 +161,7 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Category Details</h4>
-      <p class="card-description"> Add class <code>.table-{color}</code>
-      </p>
+      
       <div class="table-responsive">
         <table class="table table-bordered table-contextual">
           <thead>
@@ -199,7 +202,7 @@
 
 
 <!-- content-wrapper ends -->
-
+</div>
 
 
 @endsection

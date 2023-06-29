@@ -10,6 +10,9 @@ Category Create
 </style>
 @endsection
 @section('content')
+<div class="card stretch-card">
+  <div class="card-body py-0 px-0 px-sm-3 mb-5 mt-5">
+
 
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,7 +21,7 @@ Category Create
 </div>
 @endif
 
-@if ($errors->any())
+@if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -28,10 +31,15 @@ Category Create
 </div>
 @endif
 
-
-<h1>Create Category</h1>
-
-
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-6  stretch-card">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title text-center">Create Category</h4>
+              {{-- <p class="card-description">
+                  Basic form layout
+              </p> --}}
+             
 <form action="{{ route('categories.store') }}" method="POST">
   @csrf
   <div class="form-group">
@@ -58,11 +66,21 @@ Category Create
 </div>
   
 
-
+<div class="text-center">
   <button type="submit" class="btn btn-primary">Create Category</button>
+</div>
 </form>
+          </div>
+      </div>
+  </div>
 
 
+
+
+
+  
+</div>
+</div>
 
 @endsection
 

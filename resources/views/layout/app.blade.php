@@ -42,6 +42,7 @@
             </div>
         </div>
     </div>
+     <!-- Preloader Start-->
     @include('home.header')
     @yield('content')
     @include('home.footer')
@@ -56,7 +57,7 @@
 </div>
 <!-- Search model end -->
 <!-- Scroll Up -->
-<div id="back-top" style="margin-bottom:73px" >
+<div id="back-top" style="margin-bottom:56px" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 

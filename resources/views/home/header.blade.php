@@ -26,6 +26,11 @@
                                     @if(session('user_id') != "" && session('user_type') != "")
                                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
+                                    <li><a href="#">Setting</a>
+                                        <ul class="submenu">
+                                            <li><a href="{{route('password.change')}}">Change Password</a></li>
+                                        </ul>
+                                    </li>
                                     @else
                                    
                                         <li><a href="{{ route('login') }}">Login</a></li>
@@ -88,7 +93,7 @@
    
     <!-- Header End -->
 </header>
-
 <!-- header end -->
+<main>
 
 
