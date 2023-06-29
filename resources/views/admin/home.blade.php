@@ -68,7 +68,19 @@
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                               {{-- <h6 class="p-3 mb-0 text-aligne-center">Profile</h6> --}}
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item preview-item" href="{{route('password.change')}}">
+                              {{-- <a class="dropdown-item preview-item" href="{{route('password.change')}}">
+                                <div class="preview-thumbnail">
+                                  <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="mdi mdi-settings text-success"></i>
+                                  </div>
+                                </div>
+                                <div class="preview-item-content">
+                                  <p class="preview-subject mb-1">Change password</p>
+                                </div>
+                              </a> --}}
+
+
+                              <a class="dropdown-item preview-item" href="{{ route('password.change') }}" data-toggle="modal" data-target="#changePasswordModal">
                                 <div class="preview-thumbnail">
                                   <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-settings text-success"></i>
@@ -100,6 +112,76 @@
                         </button>
                       </div>
                     </nav>
+
+                    @if (session()->has('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+                
+                @if (session()->has('errors'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                    <div class="modal" id="changePasswordModal">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{{ route('password.change.submit') }}" method="POST" class="d-flex flex-column">
+                              @csrf
+                          
+                              <div class="form-group">
+                                  <label for="current_password">Current Password:</label>
+                                  <input type="password" id="current_password" name="current_password" class="form-control" required>
+                                  @error('current_password')
+                                      <span class="error">{{ $message }}</span>
+                                  @enderror
+                              </div>
+                          
+                              <div class="form-group">
+                                  <label for="new_password">New Password:</label>
+                                  <input type="password" id="new_password" name="new_password" class="form-control" required>
+                                  @error('new_password')
+                                      <span class="error">{{ $message }}</span>
+                                  @enderror
+                              </div>
+                          
+                              <div class="form-group">
+                                  <label for="new_password_confirmation">Confirm New Password:</label>
+                                  <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="form-control" required>
+                                  @error('new_password_confirmation')
+                                      <span class="error">{{ $message }}</span>
+                                  @enderror
+                              </div>
+                          
+                              <button type="submit" class="btn btn-primary">Change Password</button>
+
+                              <p class="sign-up text-center">
+                                  Want to go back? 
+                                  @if(session('user_type') != "")
+                                      <a href="{{ route('home') }}">Home</a>
+                                  @else
+                                      <a href="{{ route('dashboard') }}">Home</a>
+                                  @endif
+                              </p>
+                              
+                          </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 <div class="content-wrapper">
                         @yield('content')
                 </div>
