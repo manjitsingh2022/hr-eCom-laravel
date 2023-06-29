@@ -73,13 +73,13 @@
                             
                                 <button type="submit" class="btn btn-primary">Change Password</button>
 
-                                <p class="sign-up text-center">
+                                <p class="sign-up text-center mt-4">
                                     Want to go back? 
-                                    @if(session('user_type') != "")
-                                        <a href="{{ route('home') }}">Home</a>
-                                    @else
-                                        <a href="{{ route('dashboard') }}">Home</a>
-                                    @endif
+                                    @if(session('user_type') == 1)
+                                    <a href="{{ route('dashboard') }}">Admin</a>
+                                  @else
+                                    <a href="{{ route('home') }}">Home</a>
+                                  @endif
                                 </p>
                                 
                             </form>

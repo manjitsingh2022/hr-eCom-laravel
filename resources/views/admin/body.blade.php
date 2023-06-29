@@ -12,197 +12,158 @@
     color: #e90000;
     /* Adjust the color as needed */
   }
+
+
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
 </style>
 @endsection
 @section('content')
 <div class="card">
+  @if (session()->has('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+      {{ session()->get('message') }}
+    </div>
+  @endif
 
-
-
-@if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-    {{ session()->get('message') }}
-</div>
-@endif
-
-@if (session()->has('errors'))
-<div class="alert alert-danger">
-    <ul>
+  @if (session()->has('errors'))
+    <div class="alert alert-danger">
+      <ul>
         @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+          <li>{{ $error }}</li>
         @endforeach
-    </ul>
-</div>
-@endif
-<!-- content-wrapper Start -->
-{{-- <div class="row">
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0"> {{$total_product}}</h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-success ">
-              <span class="mdi mdi-package-variant-closed icon-products"></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Products</h6>
-      </div>
+      </ul>
     </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0">{{$total_order}}</h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-success">
-              <span class="mdi mdi-cart icon-orders"></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Orders</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0">{{$total_user}}</h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-danger">
-              <span class="mdi mdi-account-multiple icon-customers"></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Customers</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0"></h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-success ">
-              <span class="mdi mdi-currency-usd icon-revenue"></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Revenue</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0">{{$total_delivered}}</h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-success ">
-              <span class="mdi mdi-package icon-delivered "></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Delivered</h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <div class="d-flex align-items-center align-self-start">
-              <h3 class="mb-0">
+  @endif
 
-              </h3>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="icon icon-box-success ">
-              <span class="mdi mdi-loading mdi-spin"></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="text-muted font-weight-normal">Total Processing</h6>
-      </div>
-    </div>
-  </div>
-
-
-
-</div> --}}
-<div class="stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title text-center">Category Details</h4>
-      
-      <div class="table-responsive">
-        <table class="table table-bordered table-contextual">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Parent Category Name</th>
-              <th>Category Name</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($categories as $category)
-                <tr >
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->parent_id ? $category->parent->category_name : '' }}</td>
-                    <td>{{ $category->category_name }}</td>
-                    <td>{{ $category->status }}</td>
-                </tr>
-                @if ($category->subcategories->count() > 0)
-                    @foreach ($category->subcategories as $subcategory)
-                        <tr >
-                            <td>{{ $subcategory->id }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td>{{ $subcategory->category_name }}</td>
-                            <td>{{ $subcategory->status }}</td>
-                        </tr>
-                    @endforeach
-                @endif
-            @endforeach
-        </tbody>
+  <div class="stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Category Details</h4>
         
-        </table>
-
+        <div class="table-responsive">
+          <table class="table table-bordered table-contextual">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Parent Category Name</th>
+                <th>Category Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($categories as $category)
+             
+              <tr>
+                  <td>{{ $category->id }}</td>
+                  <td>
+                      @if ($category->parent_id)
+                          {{ $category->parent->category_name }}
+                      @endif
+                  </td>
+                  <td>{{ $category->category_name }}</td>
+                  <td>
+                      <label class="switch">
+                          <input type="checkbox" data-category-id="{{ $category->id }}" data-route="{{ route('admin.category.updateStatus', $category->id) }}" {{ $category->status == 1 ? 'checked' : '' }}>
+                          <span class="slider"></span>
+                      </label>
+                  </td>
+              </tr>
+              @if ($category->subcategories->count() > 0)
+                  @foreach ($category->subcategories as $subcategory)
+                      <tr>
+                          <td>{{ $subcategory->id }}</td>
+                          <td>
+                              {{ $category->category_name }}
+                          </td>
+                          <td>{{ $subcategory->category_name }}</td>
+                          <td>
+                              <label class="switch">
+                                  <input type="checkbox" data-category-id="{{ $subcategory->id }}" data-route="{{ route('admin.category.updateStatus', $subcategory->id) }}" {{ $subcategory->status == 1 ? 'checked' : '' }}>
+                                  <span class="slider"></span>
+                              </label>
+                          </td>
+                      </tr>
+                  @endforeach
+              @endif
+          @endforeach
+          
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<!-- content-wrapper ends -->
-</div>
-
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('input[type="checkbox"]').on('change', function() {
+      var categoryId = $(this).data('category-id');
+      var route = $(this).data('route');
+      var status = $(this).is(':checked') ? 1 : 0;
+
+      $.ajax({
+        url: route,
+        dataType: 'json',
+        type: 'PUT',
+        data: {
+          status: status,
+          _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+          console.log(response);
+          location.reload(); 
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          console.log(xhr.responseText);
+        }
+      });
+    });
+  });
+</script>
+

@@ -82,13 +82,8 @@ class CategoryController extends Controller
 
 
 
-    // public function destroy(Category $category)
-    // {
-    //     // Logic to delete the category
-    //     $category->delete();
 
-    //     return redirect()->back()->with('success', 'Category deleted successfully');
-    // }
+
 
 
 
@@ -103,5 +98,18 @@ class CategoryController extends Controller
         } else {
             return redirect()->back()->with("error", "Category not found.");
         }
+    }
+
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $status = $request->input('status');
+        $subcategory = Category::findOrFail($id);
+
+        $subcategory->status = $status;
+        $subcategory->save();
+
+        return response()->json(['success' => true]);
     }
 }

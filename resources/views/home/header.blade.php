@@ -25,10 +25,10 @@
                                     
                                     @if(session('user_id') != "" && session('user_type') != "")
                                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                                    <li><a href="#">Setting</a>
+                                    <li><a href="#">Profile</a>
                                         <ul class="submenu">
                                             <li><a href="{{route('password.change')}}">Change Password</a></li>
+                                            <li><a href="{{ route('logout') }}">Logout</a></li>
                                         </ul>
                                     </li>
                                     @else

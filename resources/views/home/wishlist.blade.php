@@ -74,7 +74,7 @@ wishlist
             <div class="container-fluid">
                 <div class="row">
                   
-                    @foreach ($products as $product)
+                    @forelse ($products as $product)
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-popular-items mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
                                 <div class="popular-img">
@@ -99,7 +99,11 @@ wishlist
                                 </form>
                               </div>
                         </div>
-                    @endforeach
+                    @empty
+                    <div class="col-md-12 text-center" style="padding-bottom: 50px; display: flex; justify-content: center; align-items: center;">
+                        <p class="card-text">Your wishlist is currently empty.</p>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

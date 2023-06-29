@@ -6,16 +6,12 @@ Show Products
 
 @section('style')
 <style type="text/css">
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-bottom: 1px solid #ddd;
-    }
+  
 
     th,
     td {
-        padding: 8px;
-        text-align: left;
+        padding: 10px;
+        text-align: center;
         border-bottom: 1px solid #ddd;
     }
 
@@ -25,24 +21,11 @@ Show Products
         border-radius: 0;
     }
 
-    .btn-delete {
-        background-color: #dc3545;
-        color: #fff;
-    }
+   
 
-    .btn-delete:hover {
-        background-color: #c82333;
-    }
+    
 
-    .btn-edit {
-        background-color: #28a745;
-        color: #fff;
-    }
-
-    .btn-edit:hover {
-        background-color: #218838;
-    }
-
+    
     .pagination {
         display: flex;
         justify-content: space-between;
@@ -71,7 +54,7 @@ Show Products
                 <th>Price</th>
                 <th>Discount Price</th>
                 <th>Edit</th>
-                <th class="text-danger">Delete</th>
+                <th >Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -126,23 +109,27 @@ Show Products
         </tbody>
     </table>
     <!-- Customized pagination links -->
-    <div class="pagination mb-4 mt-4">
-        <div>
-            <!-- Previous page link -->
-            @if ($products->onFirstPage())
-            <span class="disabled">&laquo; Previous</span>
-            @else
-            <a href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
-            @endif
-        </div>
-        <div>
-            Page {{ $products->currentPage() }} of {{ $products->lastPage() }}
-            @if ($products->hasMorePages())
-            <a href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
-            @else
-            <span class="disabled">Next &raquo;</span>
-            @endif
-        </div>
-    </div>
+    <nav>
+        <ul class="pagination mb-4 mt-4">
+            <li class="page-item">
+                @if ($products->onFirstPage())
+                <span class="page-link disabled">&laquo; Previous</span>
+                @else
+                <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
+                @endif
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ $products->currentPage() }} of {{ $products->lastPage() }}</span>
+            </li>
+            <li class="page-item">
+                @if ($products->hasMorePages())
+                <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+                @else
+                <span class="page-link disabled">Next &raquo;</span>
+                @endif
+            </li>
+        </ul>
+    </nav>
+    
 </div>
 @endsection

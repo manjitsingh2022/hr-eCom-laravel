@@ -140,43 +140,44 @@
                           <div class="modal-body">
                             <form action="{{ route('password.change.submit') }}" method="POST" class="d-flex flex-column">
                               @csrf
-                          
+                            
                               <div class="form-group">
-                                  <label for="current_password">Current Password:</label>
-                                  <input type="password" id="current_password" name="current_password" class="form-control" required>
-                                  @error('current_password')
-                                      <span class="error">{{ $message }}</span>
-                                  @enderror
+                                <label for="current_password">Current Password:</label>
+                                <input type="password" id="current_password" name="current_password" class="form-control" required autocomplete="current-password">
+                                @error('current_password')
+                                  <span class="error">{{ $message }}</span>
+                                @enderror
                               </div>
-                          
+                            
                               <div class="form-group">
-                                  <label for="new_password">New Password:</label>
-                                  <input type="password" id="new_password" name="new_password" class="form-control" required>
-                                  @error('new_password')
-                                      <span class="error">{{ $message }}</span>
-                                  @enderror
+                                <label for="new_password">New Password:</label>
+                                <input type="password" id="new_password" name="new_password" class="form-control" required autocomplete="new-password">
+                                @error('new_password')
+                                  <span class="error">{{ $message }}</span>
+                                @enderror
                               </div>
-                          
+                            
                               <div class="form-group">
-                                  <label for="new_password_confirmation">Confirm New Password:</label>
-                                  <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="form-control" required>
-                                  @error('new_password_confirmation')
-                                      <span class="error">{{ $message }}</span>
-                                  @enderror
+                                <label for="new_password_confirmation">Confirm New Password:</label>
+                                <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="form-control" required autocomplete="new-password">
+                                @error('new_password_confirmation')
+                                  <span class="error">{{ $message }}</span>
+                                @enderror
                               </div>
-                          
+                            
                               <button type="submit" class="btn btn-primary">Change Password</button>
-
-                              <p class="sign-up text-center">
-                                  Want to go back? 
-                                  @if(session('user_type') != "")
-                                      <a href="{{ route('home') }}">Home</a>
-                                  @else
-                                      <a href="{{ route('dashboard') }}">Home</a>
-                                  @endif
-                              </p>
+                            
+                              <p class="sign-up text-center mt-4">
+                                Want to go back? 
+                                @if(session('user_type') == 1)
+                                <a href="{{ route('dashboard') }}">Admin</a>
+                              @else
+                                <a href="{{ route('home') }}">Home</a>
+                              @endif
                               
-                          </form>
+                              </p>
+                            </form>
+                            
                           </div>
                         </div>
                       </div>

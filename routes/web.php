@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('get-subcategories', [CategoryController::class, 'getSubcategories'])->name('getSubcategories');
         Route::get('admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('edit_category');
         Route::post('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::put('/category/update-status/{category}', [CategoryController::class, 'updateStatus'])->name('admin.category.updateStatus');
 
 
         Route::get('admin/product/create', [ProductController::class, 'show'])->name('product');
@@ -71,6 +72,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('admin/product/{id}/delete', [ProductController::class, 'delete_product'])->name('product.delete');
         Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('admin/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+
 
         Route::get('admin/settings', [AdminController::class, 'setting'])->name('viewsettings');
         Route::post('admin/settingspost', [AdminController::class, 'settingstore'])->name('settings.store');
