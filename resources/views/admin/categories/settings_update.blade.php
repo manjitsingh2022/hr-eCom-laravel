@@ -63,8 +63,10 @@ Setting Updated
                         <input type="text" name="setting_value" id="setting_value" class="form-control"
                             value="{{ $setting->setting_value }}">
                     </div>
+<div class="mb-4 text-center mt-4">
 
-                    <button type="submit" class="btn btn-primary">Update Setting</button>
+    <button type="submit" class="btn btn-primary">Update Setting</button>
+</div>
                 </form>
             </div>
         </div>

@@ -54,7 +54,7 @@ Category Lists
             </thead>
 
             <tbody>
-                @foreach ($categories as $category)
+                @forelse ($categories as $category)
                 <tr>
                     <td>{{ $category->category_name }}</td>
                    
@@ -63,14 +63,39 @@ Category Lists
                         <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
                         </a>
                     </td>
-                               
-                    <td> 
-                            <a class="nav-link"onclick="return confirm('Are you sure you want to delete this category?')" href="{{ route('delete_category', $category->id) }}">
-                                    <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" >Delete</button>
-                            </a>
-                    </td>
+                    <td>
+                        <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" data-toggle="modal" data-target="#myConfirmDlg{{ $category->id }}">
+                            Delete
+                        </button>
+                    </td>        
+                   
                 </tr>
-                @endforeach
+                <div class="modal fade" id="myConfirmDlg{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this item?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a href="{{ route('delete_category', $category->id) }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @empty
+            <tr >
+                <td colspan="9">
+                    <p class="text-center bg-danger">No records found.</p>
+                </td>
+            </tr>
+            @endforelse
             </tbody>
         </table>
 

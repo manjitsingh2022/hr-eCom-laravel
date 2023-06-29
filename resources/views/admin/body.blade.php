@@ -160,7 +160,7 @@
 <div class="stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Category Details</h4>
+      <h4 class="card-title text-center">Category Details</h4>
       
       <div class="table-responsive">
         <table class="table table-bordered table-contextual">
