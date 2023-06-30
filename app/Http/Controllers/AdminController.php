@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ class AdminController extends Controller
     public function adminIndex()
     {
         $categories = Category::where('parent_id', 0)->get();
-        // $products =  Product::all();
         return view('admin.body', compact('categories'));
     }
 
@@ -39,7 +39,7 @@ class AdminController extends Controller
 
         if ($user->usertype == 1) {
             $settings = new Settings();
-            $settings->setting_key = $validatedData['setting_key'];
+            $settings->setting_key = preg_replace('/\s+(?=\S)/', '_', $validatedData['setting_key']);
             $settings->setting_value = $validatedData['setting_value'];
 
             $settings->save();
@@ -71,8 +71,25 @@ class AdminController extends Controller
             'setting_value' => 'required',
         ]);
 
+        $validatedData['setting_key'] = preg_replace('/\s+(?=\S)/', '_', $validatedData['setting_key']);
+
         $setting->update($validatedData);
 
         return redirect()->route('viewsettings')->with('success', 'Setting updated successfully');
+    }
+
+
+
+
+
+    public function search(Request $request)
+    {
+
+        $search = $request->input('search');
+        $results = Product::where('product_name', 'like', '%' . $search . '%')
+            ->orWhere('category_name', 'like', '%' . $search . '%')
+            ->get();
+
+        return response()->json(['results' => $results]);
     }
 }

@@ -42,8 +42,8 @@
                         <ul class="navbar-nav navbar-nav-right">
                        
                           <li class="nav-item dropdown d-none d-lg-block create-new-button" >
-                            <a class="nav-link" href="{{route('home')}}">
-                                    <button type="button" class="btn btn-success btn-rounded btn-fw">View</button>
+                            <a class="nav-link btn btn-success btn-rounded btn-fw" href="{{route('home')}}" target="_blank">
+                                    View
                             </a>
                           </li>
 
@@ -182,7 +182,6 @@
                         </div>
                       </div>
                     </div>
-
                 <div class="content-wrapper">
                         @yield('content')
                 </div>

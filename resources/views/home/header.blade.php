@@ -61,20 +61,28 @@
                         <div class="main-menu  d-none d-lg-block" style="margin-left: -7px">
                             <nav>
                                 <ul id="navigation">
+                                  
                                     @foreach(mainCategory() as $category)
                                         <li>
                                             <a href="{{ route('category.show', ['category' => $category->id, 'categoryname' => strtolower($category->category_name)]) }}">{{ $category->category_name }}</a>
                                             @if($category->subcategories->count() > 0)
                                                 <ul class="submenu">
                                                     @foreach($category->subcategories as $subcategory)
-                                                        <li>
-                                                            <a href="{{ route('category.show', ['category' => $subcategory->id, 'categoryname' => strtolower($subcategory->category_name)]) }}">{{ $subcategory->category_name }}</a>
-                                                        </li>
+                                                        @php
+                                                            $subcategoryStatus = $subcategory->status;
+                                                        @endphp
+                                                        @if($subcategoryStatus == 1)
+                                                            <li>
+                                                                <a href="{{ route('category.show', ['category' => $subcategory->id, 'categoryname' => strtolower($subcategory->category_name)]) }}">{{ $subcategory->category_name }}</a>
+                                                            </li>
+                                                        @elseif($subcategoryStatus == 0)
+                                                        @endif
                                                     @endforeach
                                                 </ul>
                                             @endif
                                         </li>
-                                    @endforeach
+                                     @endforeach
+
                                 </ul>
                                 
                             </nav>

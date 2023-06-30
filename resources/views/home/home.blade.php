@@ -2,6 +2,8 @@
 @section('title')
 The Beverly Hills Luxury Boutique
 @endsection
+@section('style')
+
 <style>
   .wish {
     position: absolute;
@@ -27,10 +29,17 @@ The Beverly Hills Luxury Boutique
   border-radius: 5px;
 }
 
+.first-page a {
+    color: #ff0000; /* Replace with your desired color */
+  }
+
+  .last-page a {
+    color: #0000ff ; /* Replace with your desired color */
+  } 
 
 
 </style>
-
+@endsection
 @section('content')
 @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -83,9 +92,46 @@ The Beverly Hills Luxury Boutique
                 </div>
             </div>
             @endforeach
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+           
+        
+<!-- Pagination -->
+<nav>
+  <ul class="  mb-4 mt-4 d-flex justify-content-between">
+    <li class="page-item first-page">
+      @if ($products->onFirstPage())
+      <span class="page-link disabled">&laquo; Previous</span>
+      @else
+      <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
+      @endif
+    </li>
+
+    <li class="page-item d-flex justify-content-center">
+      <ul class="pagination m-0">
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+        <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">
+          <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+        </li>
+        @endfor
+      </ul>
+    </li>
+
+    <li class="page-item last-page">
+      @if ($products->hasMorePages())
+      <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+      @else
+      <span class="page-link disabled">Next &raquo;</span>
+      @endif
+    </li>
+  </ul>
+</nav>
+
+
+
+
+
 
 
 

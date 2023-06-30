@@ -44,6 +44,8 @@ Route::get('category/{category}/{categoryname}', [UserController::class, 'showda
 
 
 
+
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/password-change', [UserController::class, 'showPasswordChangeForm'])->name('password.change');
     Route::post('/password-change', [UserController::class, 'passwordChange'])->name('password.change.submit');
@@ -72,8 +74,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('admin/product/{id}/delete', [ProductController::class, 'delete_product'])->name('product.delete');
         Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('admin/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+        Route::delete('delete-values', [ProductController::class, 'deleteValues'])->name('delete.values');
 
 
+
+        Route::get('search',  [AdminController::class, 'search'])->name('search');
         Route::get('admin/settings', [AdminController::class, 'setting'])->name('viewsettings');
         Route::post('admin/settingspost', [AdminController::class, 'settingstore'])->name('settings.store');
         Route::delete('/settings/{setting}', [AdminController::class, 'destroy'])->name('settings.destroy');

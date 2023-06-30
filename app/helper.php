@@ -28,13 +28,15 @@ if (!function_exists('get_formatted_date')) {
 
 
 if (!function_exists('mainCategory')) {
-    function mainCategory()
+    function mainCategory($status = 1)
     {
-        $data = Category::where('parent_id', 0)->where('status', 1)->select('id', 'category_name')->get();
-
+        $data = Category::select('id', 'category_name')->where([
+            ['parent_id', 0], ['status', $status]
+        ])->get();
         return $data;
     }
 }
+
 
 
 if (!function_exists('settings')) {

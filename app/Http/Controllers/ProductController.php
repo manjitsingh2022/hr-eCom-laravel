@@ -30,7 +30,8 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            date_default_timezone_set('Asia/Kolkata');
+            $imageName = date('Y-m-d_H-i-s') . '.' . $image->getClientOriginalName();
             $image->move('product', $imageName);
             $product->image = $imageName;
         }
@@ -125,5 +126,14 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('showproduct')->with('message', 'Product updated successfully!');
+    }
+
+
+
+    public function deleteValues(Request $request)
+    {
+        $selectedValues = $request->input('selectedIDs');
+        Product::whereIn('id', $selectedValues)->delete();
+        return response()->json(['message' => 'Values deleted successfully']);
     }
 }

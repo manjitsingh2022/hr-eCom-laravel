@@ -78,7 +78,6 @@ input:checked + .slider:before {
   @endif
 
   <div class="stretch-card">
-    <div class="card">
       <div class="card-body">
         <h4 class="card-title text-center">Category Details</h4>
         
@@ -132,7 +131,6 @@ input:checked + .slider:before {
             </tbody>
           </table>
         </div>
-      </div>
     </div>
   </div>
 </div>

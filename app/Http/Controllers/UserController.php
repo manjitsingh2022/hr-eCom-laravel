@@ -20,8 +20,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $categories = Category::where('parent_id', 0)->get();
-        $products = Product::all();
+        $categories = Category::where('parent_id', 0)->get()->where('status', 1);
+        $products = Product::paginate(8);
         $wishlist = [];
 
         if (Auth::check()) {
@@ -184,7 +184,7 @@ class UserController extends Controller
         $user = User::where('email', $credentials['email'])->first();
 
         if (!$user) {
-            return redirect()->route('login')->with('login_error', 'Email not found');
+            return redirect()->route('login')->with('errors', 'Email not found');
         }
 
         if (Auth::attempt($credentials)) {
@@ -198,7 +198,7 @@ class UserController extends Controller
                 }
             } else {
                 Auth::logout();
-                return redirect()->route('login')->with('verified', false)->with('login_error', 'User not verified');
+                return redirect()->route('login')->with('verified', false)->with('errors', 'User not verified');
             }
         }
 

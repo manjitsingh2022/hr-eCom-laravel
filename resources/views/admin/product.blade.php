@@ -141,6 +141,4 @@ Add Product
   });
 </script>
 
-
-
 @endsection

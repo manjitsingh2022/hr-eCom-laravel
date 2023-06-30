@@ -14,7 +14,6 @@ class ActionController extends Controller
 {
     public function verifyemail()
     {
-
         return view('auth.verify-email');
     }
 
