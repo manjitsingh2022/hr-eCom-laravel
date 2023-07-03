@@ -44,7 +44,7 @@ class CategoryController extends Controller
         if ($category->wasRecentlyCreated) {
             return redirect()->route('viewcategorylist')->with('message', 'Category created successfully.');
         } else {
-            return redirect()->route('viewcategory')->with('error', 'Category already exists. Please choose a different name.');
+            return redirect()->route('viewcategory')->with('errors', 'Category already exists. Please choose a different name.');
         }
     }
 
@@ -96,7 +96,7 @@ class CategoryController extends Controller
             $data->delete();
             return redirect()->back()->with("message", "Category deleted successfully.");
         } else {
-            return redirect()->back()->with("error", "Category not found.");
+            return redirect()->back()->with("errors", "Category not found.");
         }
     }
 
@@ -110,6 +110,6 @@ class CategoryController extends Controller
         $subcategory->status = $status;
         $subcategory->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => true]);
     }
 }

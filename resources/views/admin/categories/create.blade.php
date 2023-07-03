@@ -14,7 +14,7 @@ Category Create
   <div class="card-body py-0 px-0 px-sm-3 mb-5 mt-5">
 
 
-@if (session()->has('message'))
+{{-- @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   &times;</button>
     {{ session()->get('message') }}
@@ -29,7 +29,7 @@ Category Create
         @endforeach
     </ul>
 </div>
-@endif
+@endif --}}
 
 <div class="row justify-content-center">
   <div class="col-md-6 col-lg-6  stretch-card">

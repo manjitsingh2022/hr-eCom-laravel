@@ -26,22 +26,9 @@
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-center mb-3">Verified Email</h3>
-                @if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-    {{ session()->get('message') }}
-</div>
-@endif
+      
 
-@if (session()->has('errors'))
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+
                 <form action="{{ route('verification.send') }}" method="post">
                   @csrf
                  
@@ -82,6 +69,7 @@
     <script src="{{ asset('public/admin/assets/js/misc.js') }}"></script>
     <script src="{{ asset('public/admin/assets/js/settings.js') }}"></script>
     <script src="{{ asset('public/admin/assets/js/todolist.js') }}"></script>
+    
     <!-- endinject -->
   </body>
 </html>

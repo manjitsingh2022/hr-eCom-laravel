@@ -35,7 +35,9 @@ class ProductController extends Controller
             $image->move('product', $imageName);
             $product->image = $imageName;
         }
+
         $product->save();
+
         return redirect()->route('showproduct')->with('message', 'Product added successfully.');
     }
 
@@ -66,7 +68,7 @@ class ProductController extends Controller
             $data->delete();
             return redirect()->back()->with("message", "Product deleted successfully.");
         } else {
-            return redirect()->back()->with("error", "Product not found.");
+            return redirect()->back()->with("errors", "Product not found.");
         }
     }
 
@@ -84,7 +86,7 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if (!$product) {
-            return redirect()->back()->with('error', 'Product not found!');
+            return redirect()->back()->with('errors', 'Product not found!');
         }
 
         $validatedData = $request->validate([

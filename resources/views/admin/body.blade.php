@@ -55,27 +55,23 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(20px);
 }
+.custom-close-btn {
+        background-color: #ffffff;
+        border: none;
+        color: #000000;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
+    .custom-close-btn:hover {
+        background-color: #e6e6e6;
+    }
 </style>
 @endsection
 @section('content')
 <div class="card">
-  @if (session()->has('message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-      {{ session()->get('message') }}
-    </div>
-  @endif
 
-  @if (session()->has('errors'))
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
+
 
   <div class="stretch-card">
       <div class="card-body">
@@ -85,7 +81,7 @@ input:checked + .slider:before {
           <table class="table table-bordered table-contextual">
             <thead>
               <tr>
-                <th>ID</th>
+                {{-- <th>ID</th> --}}
                 <th>Parent Category Name</th>
                 <th>Category Name</th>
                 <th>Status</th>
@@ -95,7 +91,7 @@ input:checked + .slider:before {
               @foreach ($categories as $category)
              
               <tr>
-                  <td>{{ $category->id }}</td>
+                  {{-- <td>{{ $category->id }}</td> --}}
                   <td>
                       @if ($category->parent_id)
                           {{ $category->parent->category_name }}
@@ -112,7 +108,7 @@ input:checked + .slider:before {
               @if ($category->subcategories->count() > 0)
                   @foreach ($category->subcategories as $subcategory)
                       <tr>
-                          <td>{{ $subcategory->id }}</td>
+                          {{-- <td>{{ $subcategory->id }}</td> --}}
                           <td>
                               {{ $category->category_name }}
                           </td>

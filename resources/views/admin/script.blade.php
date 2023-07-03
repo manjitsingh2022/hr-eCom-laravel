@@ -18,5 +18,16 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="  {{asset('public/admin/assets/js/dashboard.js')}}"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            // Close alert when the close button is clicked
+            $('.alert .btn-close').on('click', function() {
+                $(this).closest('.alert').alert('close');
+            });
+        });
+    </script>
+    
     <!-- Custom  js to script content -->
     @yield('scriptcontent')

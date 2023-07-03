@@ -8,6 +8,19 @@
         text-align: center;
         padding-top: 40px;
     }
+    .custom-close-btn {
+        background-color: #ffffff;
+        border: none;
+        color: #000000;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .custom-close-btn:hover {
+        background-color: #e6e6e6;
+    }
+
+
    </style>
 
    
@@ -22,7 +35,25 @@
             {{-- @include('admin.header') --}}
             <!-- partial -->
             <div class="main-panel">
-
+              @if (session()->has('message'))
+              <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between" role="alert">
+                  {{ session()->get('message') }}
+                  <button type="button" class="btn btn-close custom-close-btn" data-bs-dismiss="alert" aria-label="Close">Close</button>
+              </div>
+          @endif
+          
+          @if (session()->has('errors'))
+              <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between" role="alert">
+                  <ul>
+                      @foreach (session('errors')->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+                  <button type="button" class="btn btn-close custom-close-btn" data-bs-dismiss="alert" aria-label="Close">Close</button>
+              </div>
+          @endif
+          
+          
                     <!-- partial:../../partials/_navbar.html -->
                     <nav class="navbar p-0 fixed-top d-flex flex-row">
                       <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
@@ -113,23 +144,9 @@
                       </div>
                     </nav>
 
-                    @if (session()->has('message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
+                   
                 
-                @if (session()->has('errors'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                
                     <div class="modal" id="changePasswordModal">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">

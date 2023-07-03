@@ -44,9 +44,9 @@ class AdminController extends Controller
 
             $settings->save();
 
-            return redirect()->back()->with('success', 'Settings saved successfully.');
+            return redirect()->back()->with('message', 'Settings saved successfully.');
         } else {
-            return redirect()->back()->with('error', 'You are not authorized to perform this action.');
+            return redirect()->back()->with('errors', 'You are not authorized to perform this action.');
         }
     }
 
@@ -54,7 +54,7 @@ class AdminController extends Controller
     public function destroy(Settings $setting)
     {
         $setting->delete();
-        return redirect()->back()->with('success', 'Setting deleted successfully');
+        return redirect()->back()->with('message', 'Setting deleted successfully');
     }
 
 
@@ -75,7 +75,7 @@ class AdminController extends Controller
 
         $setting->update($validatedData);
 
-        return redirect()->route('viewsettings')->with('success', 'Setting updated successfully');
+        return redirect()->route('viewsettings')->with('message', 'Setting updated successfully');
     }
 
 

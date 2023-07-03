@@ -27,13 +27,13 @@
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-center mb-3">Register</h3>
-                @if (session()->has('message'))
+                {{-- @if (session()->has('message'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
     {{ session()->get('message') }}
 </div>
-@endif
-@if (session()->has('errors'))
+@endif --}}
+{{-- @if (session()->has('errors'))
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
         @endforeach
     </ul>
 </div>
-@endif
+@endif --}}
                 <form action="{{ route('registerpost') }}" method="POST">
                   @csrf
                   <div class="form-group">

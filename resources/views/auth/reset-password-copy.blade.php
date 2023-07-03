@@ -102,6 +102,7 @@
     <script src="{{asset('public/admin/assets/js/misc.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/settings.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/todolist.js')}}"></script>
+    
 </body>
 
 </html>

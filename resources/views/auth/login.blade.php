@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="{{asset('public/admin/assets/css/style.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('public/admin/assets/images/favicon.ico')}}" />
+    <style>
+         .custom-close-btn {
+        background-color: #ffffff;
+        border: none;
+        color: #000000;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .custom-close-btn:hover {
+        background-color: #e6e6e6;
+    }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -31,16 +44,11 @@
         Your email is not verified. Please check your email for the verification link or request a new one.
     </div>
 @endif
-@if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-    {{ session()->get('message') }}
-</div>
-@endif
+
 
 @if (session()->has('errors'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
         {{ session()->get('errors') }}
     </div>
 @endif
@@ -96,6 +104,14 @@
     <script src="{{asset('public/admin/assets/js/misc.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/settings.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/todolist.js')}}"></script>
+    <script>
+      $(document).ready(function() {
+          // Close alert when the close button is clicked
+          $('.alert .btn-close').on('click', function() {
+              $(this).closest('.alert').alert('close');
+          });
+      });
+  </script>
     <!-- endinject -->
   </body>
 </html>

@@ -24,22 +24,6 @@ Settings
 @section('content')
 <div class="card px-5 ">
 
-@if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-    {{ session()->get('message') }}
-</div>
-@endif
-
-@if (session()->has('errors'))
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
 
 <div class="row justify-content-center">

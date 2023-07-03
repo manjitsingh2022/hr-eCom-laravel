@@ -51,8 +51,8 @@
         <h1 class="div_center">All Products</h1>
         <div>
             <button id="deleteAllSelectedRecords" class="btn btn-danger btn-rounded btn-fw " type="button" >Delete All Products</button>
-<!-- Add this element to display the message -->
-<p id="deleteMsg" style="display: none;">No records selected for deletion.</p>
+                <!-- Add this element to display the message -->
+                <p id="deleteMsg" style="display: none;">No records selected for deletion.</p>
 
         </div>
         <table class="text-center w-100">

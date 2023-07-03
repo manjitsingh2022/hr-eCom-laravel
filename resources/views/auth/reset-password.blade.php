@@ -23,43 +23,35 @@
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
                             <h3 class="card-title text-center mb-3">Change Password</h3>
-                            @if (session()->has('message'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>
-                                {{ session()->get('message') }}
-                            </div>
-                            @endif
-                            
-                            @if (session()->has('errors'))    
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
+                       
                     
                         <!-- auth/reset-password.blade.php -->
-                        <form action="{{ route('password.update') }}" method="POST">
+                        <form action="{{ route('password.update') }}" method="POST" class="d-flex flex-column">
                             @csrf
                             <input type="hidden" name="token" value="{{ $token }}">
+                            <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input class="form-control" type="email" id="email" name="email" required>
+                           
                             @error('email')
                             <span class="error">{{ $message }}</span>
                             @enderror
+                        </div>
+                            <div class="form-group">
                             <label for="password">New Password:</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required>
                             @error('password')
                             <span class="error">{{ $message }}</span>
                             @enderror
+                        </div>
+                            <div class="form-group">
                             <label for="password_confirmation">Confirm Password:</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                             @error('password_confirmation')
                             <span class="error">{{ $message }}</span>
                             @enderror
-                            <button type="submit">Reset Password</button>
+                        </div>
+                            <button class="btn btn-primary text-center" type="submit">Reset Password</button>
                         </form>
   
                         </div>
@@ -79,6 +71,7 @@
     <script src="{{asset('public/admin/assets/js/misc.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/settings.js')}}"></script>
     <script src="{{asset('public/admin/assets/js/todolist.js')}}"></script>
+    
 </body>
 
 </html>
