@@ -13,8 +13,11 @@ $settings = settings();
                       <!-- logo -->
                       <div class="footer-logo mb-35">
                         {{-- <h1 style="color:white;">The beverly hills luxury boutique</h1> --}}
-                       <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo2_footer.png')}}" alt="" width="180px"></a>
-                   </div>
+                       {{-- <a href="{{route('home')}}"><img src="{{asset('public/home/assets/img/logo/logo2_footer.png')}}" alt="" width="180px"></a> --}}
+                       <a href="{{ route('home') }}" style="display: inline-block;">
+                        <img src="{{ isset($settings['logo']) ? asset('public/logo/' . $settings['logo']) : asset('public/logo/logo.png') }}" alt="" width="180px" style="filter: invert(1);">
+                    </a>
+                                       </div>
                    <div class="footer-tittle">
                        <div class="footer-pera">
                           <p>{{ isset($settings['description']) ? $settings['description'] : 'description' }}</p>

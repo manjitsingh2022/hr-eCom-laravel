@@ -10811,7 +10811,7 @@ select.typeahead:focus::-ms-value,
 select.tt-query:focus::-ms-value,
 select.tt-hint:focus::-ms-value {
     color: #495057;
-    background-color: #2a3038;
+    background-color: #ffffff;
 }
 
 .form-control-file,
@@ -19558,6 +19558,9 @@ button.bg-dark:focus {
 .d-table-cell {
     display: table-cell !important;
 }
+.d-grid {
+    display: grid !important;
+}
 
 .d-flex,
 .page-header,
@@ -25740,7 +25743,7 @@ code {
 .tt-query:focus,
 .tt-hint:focus {
     border: 1px solid rgba(71, 164, 71, 0.5);
-    background-color: #2a3038;
+    background-color: #ffffff;
 }
 .form-control.form-control-lg,
 .form-control-lg.asColorPicker-input,
@@ -32959,8 +32962,8 @@ div.tagsinput span.tag a {
 }
 .sidebar .sidebar-brand-wrapper .sidebar-brand img {
     width: calc(244px - 120px);
-    max-width: 100%;
-    height: 28px;
+    height: 60px !important;
+    width: 100px !important;
     margin: auto;
     vertical-align: middle;
 }
@@ -32969,8 +32972,8 @@ div.tagsinput span.tag a {
 }
 .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img {
     width: calc(70px - 50px);
-    max-width: 100%;
-    height: 28px;
+    width: 40px !important;
+    height: 25px !important;
     margin: auto;
 }
 .sidebar .nav {

@@ -57,33 +57,36 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::group(['middleware' => ['admin']], function () {
         Route::get('admin', [AdminController::class, 'adminIndex'])->name('dashboard');
-        Route::get('admin/view_category', [CategoryController::class, 'view_category'])->name('viewcategorylist');
-        Route::get('admin/delete_catagory/{id}', [CategoryController::class, 'delete_catagory'])->name('delete_category');
-        Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('viewcategory');
+        Route::get('category', [CategoryController::class, 'view_category'])->name('viewcategorylist');
+        Route::get('category/delete/{id}', [CategoryController::class, 'delete_catagory'])->name('delete_category');
+        Route::get('categories/create', [CategoryController::class, 'create'])->name('viewcategory');
         Route::post('categories', [CategoryController::class, 'storeCatgory'])->name('categories.store');
         Route::post('get-subcategories', [CategoryController::class, 'getSubcategories'])->name('getSubcategories');
-        Route::get('admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('edit_category');
+        Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('edit_category');
         Route::post('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
         Route::put('/category/update-status/{category}', [CategoryController::class, 'updateStatus'])->name('admin.category.updateStatus');
 
 
-        Route::get('admin/product/create', [ProductController::class, 'show'])->name('product');
+        Route::get('product/create', [ProductController::class, 'show'])->name('product');
         Route::post('products', [ProductController::class, 'storeProduct'])->name('products.store');
-        Route::get('admin/view_product', [ProductController::class, 'view_product'])->name('viewproduct');
-        Route::get('admin/show_product', [ProductController::class, 'show_product'])->name('showproduct');
-        Route::get('admin/product/{id}/delete', [ProductController::class, 'delete_product'])->name('product.delete');
+        Route::get('view_product', [ProductController::class, 'view_product'])->name('viewproduct');
+        Route::get('show_product', [ProductController::class, 'show_product'])->name('showproduct');
+        Route::get('product/{id}/delete', [ProductController::class, 'delete_product'])->name('product.delete');
         Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-        Route::get('admin/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+        Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
         Route::delete('delete-values', [ProductController::class, 'deleteValues'])->name('delete.values');
 
 
 
         Route::get('search',  [AdminController::class, 'search'])->name('search');
-        Route::get('admin/settings', [AdminController::class, 'setting'])->name('viewsettings');
-        Route::post('admin/settingspost', [AdminController::class, 'settingstore'])->name('settings.store');
+        Route::get('settings', [AdminController::class, 'setting'])->name('viewsettings');
+        Route::post('settingspost', [AdminController::class, 'settingstore'])->name('settings.store');
         Route::delete('/settings/{setting}', [AdminController::class, 'destroy'])->name('settings.destroy');
         Route::get('settings/{setting}/edit', [AdminController::class, 'edit'])->name('settings.edit');
         Route::put('settings/{setting}',   [AdminController::class, 'update'])->name('settings.update');
+
+        Route::get('upload-logo', [AdminController::class, 'uploadLogo'])->name('uploadLogo');
+        Route::post('upload-logo-store', [AdminController::class, 'loadLogoStore'])->name('uploadLogoStore');
 
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
     });

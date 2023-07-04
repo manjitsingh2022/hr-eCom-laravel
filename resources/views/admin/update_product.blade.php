@@ -53,18 +53,20 @@ Update Product
                         <label for="quantity" class="form-label">Product Quantity:</label>
                         <input class="form-control" type="number" name="quantity" value="{{ old('quantity', $product->quantity) }}" placeholder="Write a quantity." required>
 
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Product category:</label>
-                                <select required name="parent_id" id="parent_id" class="form-control">
-                                    <option value="" disabled>Add a category here</option>
-                                    
-                                    @foreach ($catagory as $category)
-                                        <option value="{{ $category->id }}" {{ old('parent_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                            {{ $category->category_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                          <label for="category" class="form-label">Product category:</label>
+                          <select required name="parent_id" id="parent_id" class="form-control">
+                              <option value="" disabled>Add a category here</option>
+                              @foreach ($catagory as $category)
+                                  @if ($category->parent_id == 0)
+                                      <option value="{{ $category->id }}" {{ old('parent_id', $product->category_id) == $category->parent_id ? 'selected' : '' }}>
+                                          {{ $category->category_name }}
+                                      </option>
+                                  @endif
+                              @endforeach
+                          </select>
+                      </div>
+                      
 
 
 

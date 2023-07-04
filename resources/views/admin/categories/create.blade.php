@@ -13,24 +13,6 @@ Category Create
 <div class="card stretch-card">
   <div class="card-body py-0 px-0 px-sm-3 mb-5 mt-5">
 
-
-{{-- @if (session()->has('message'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  &times;</button>
-    {{ session()->get('message') }}
-</div>
-@endif
-
-@if (session()->has('errors'))
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif --}}
-
 <div class="row justify-content-center">
   <div class="col-md-6 col-lg-6  stretch-card">
       <div class="card">

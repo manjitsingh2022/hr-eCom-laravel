@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{asset('public/admin/assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin/assets/css/style.css')}}">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('public/admin/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('public/admin/assets/images/favicon.png')}}" />
 </head>
 
 <body>

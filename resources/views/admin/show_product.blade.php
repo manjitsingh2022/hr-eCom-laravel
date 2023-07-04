@@ -1,7 +1,7 @@
 @extends('admin.home')
 
 @section('title')
-    Show Products
+Products
 @endsection
 
 @section('style')
@@ -48,7 +48,7 @@
 
 @section('content')
     <div class="card px-5">
-        <h1 class="div_center">All Products</h1>
+        <h1 class="div_center">Products</h1>
         <div>
             <button id="deleteAllSelectedRecords" class="btn btn-danger btn-rounded btn-fw " type="button" >Delete All Products</button>
                 <!-- Add this element to display the message -->

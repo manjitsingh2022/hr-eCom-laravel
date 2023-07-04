@@ -26,7 +26,7 @@ Category Lists
 
 
    <div class="div_center">
-    <h2 class="h2_font">All Categories</h2>
+    <h2 class="h2_font">Categories</h2>
 
     <div class="container">
         <table class="table table-bordered table-hover mx-auto w-50 text-center">

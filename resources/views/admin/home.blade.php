@@ -26,7 +26,7 @@
    
 </head>
 <body>
-    <div class="container-scroller">
+  <div class="container-scroller">
         <!-- sidebar -->
         @include('admin.sidebar')
         <!-- partial -->

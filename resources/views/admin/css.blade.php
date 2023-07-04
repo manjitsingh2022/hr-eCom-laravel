@@ -17,4 +17,4 @@
 <!-- Layout styles -->
 <link rel="stylesheet" href="{{ asset('public/admin/assets/css/style.css') }}">
 <!-- End layout styles -->
-<link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}" />
+<link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.png') }}" />

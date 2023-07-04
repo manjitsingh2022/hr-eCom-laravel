@@ -41,6 +41,7 @@ Settings
               <label for="setting_value">Setting Value</label>
               <input type="text" name="setting_value" id="setting_value" class="form-control" required>
           </div>
+          
 <div class="text-center">
     <button type="submit" class="btn btn-primary">Save Settings</button>
 </div>
