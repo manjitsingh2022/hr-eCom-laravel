@@ -37,23 +37,29 @@ Category Lists
                     <th>Delete</th>
                 </tr>
             </thead>
-
             <tbody>
                 @forelse ($categories as $category)
+
+              
                 <tr>
-                    <td>{{ $category->category_name }}</td>
-                   
+                    <td>
+                        {{ $category->category_name }}
+                        <span >({{ $category->product_count }})</span>
+                    </td>
+                                
                     <td> 
-                        <a class="nav-link"href="{{ route('edit_category', $category->id) }}">
-                        <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                        <a class="nav-link" href="{{ route('edit_category', $category->id) }}">
+                            <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
                         </a>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" data-toggle="modal" data-target="#myConfirmDlg{{ $category->id }}">
-                            Delete
-                        </button>
-                    </td>        
-                   
+                        @if ($category->product_count >= 1)
+                          <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" disabled>Delete</button>
+                        @else
+                          <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" data-toggle="modal" data-target="#myConfirmDlg{{ $category->id }}">Delete</button>
+                        @endif
+                      </td>      
+                               
                 </tr>
                 <div class="modal fade" id="myConfirmDlg{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -75,13 +81,15 @@ Category Lists
                     </div>
                 </div>
                 @empty
-            <tr >
-                <td colspan="9">
-                    <p class="text-center bg-danger">No records found.</p>
-                </td>
-            </tr>
-            @endforelse
+                <tr>
+                    <td colspan="9">
+                        <p class="text-center bg-danger">No records found.</p>
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
+            
+          
         </table>
 
         <!-- Customized pagination links -->

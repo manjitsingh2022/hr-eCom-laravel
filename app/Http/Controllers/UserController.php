@@ -43,7 +43,6 @@ class UserController extends Controller
 
     public function showdataCategory($category, $categoryname)
     {
-
         $categories = Category::find($category);
         $wishlist = [];
 
@@ -54,7 +53,8 @@ class UserController extends Controller
         }
 
         if (!empty($categories)) {
-            $products = Product::where('parent_id', $categories->id)->get();
+            $products = Product::where('parent_id', $categories->id)->paginate(8);
+
 
 
             return view('home.product_details', compact('categories', 'products', 'wishlist'));
@@ -74,18 +74,11 @@ class UserController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             $wishlist = Wishlist::where('user_id', $user->id)->pluck('product_id')->toArray();
-            $products = Product::whereIn('id', $wishlist)->get();
+            $products = Product::whereIn('id', $wishlist)->paginate(8);
         }
 
         return view('home.wishlist', compact('wishlist', 'products'));
     }
-
-
-
-
-
-
-
 
 
 
@@ -151,7 +144,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->new_password);
             $user->save();
 
-            if ($user->usertype === 1) {
+            if ($user->usertype === "1") {
                 return redirect()->route('dashboard')->with('message', 'Password changed successfully.');
             } else {
                 return redirect()->route('home')->with('message', 'Password changed successfully.');
@@ -171,11 +164,10 @@ class UserController extends Controller
 
 
 
-
     public function loginPost(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        $remember = $request->has('remember');
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -187,13 +179,20 @@ class UserController extends Controller
             return redirect()->route('login')->with('errors', 'Email not found');
         }
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             if ($user->email_verified_at !== null) {
                 Session::put(['user_id' => Auth::id(), 'user_type' => Auth::user()->usertype]);
-                if ($user->usertype === 1) {
-                    return redirect()->route('dashboard')->with('message', 'Login successful');
+
+                if ($remember) {
+                    $rememberToken = Auth::getRecallerName();
+                    $cookie = cookie($rememberToken, Auth::user()->getRememberToken(), 1440);
+                    return redirect()->intended()->withCookie($cookie);
                 }
-                if ($user->usertype === 0) {
+
+
+                if ($user->usertype === "1") {
+                    return redirect()->route('dashboard')->with('message', 'Login successful');
+                } else {
                     return redirect()->route('home')->with('message', 'Login successful');
                 }
             } else {
@@ -202,9 +201,8 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('login')->with('errors', 'Invalid password');
+        return redirect()->route('login')->with('errors', 'Invalid email or password');
     }
-
 
 
 

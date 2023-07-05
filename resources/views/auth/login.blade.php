@@ -68,7 +68,8 @@
                   <div class="form-group d-flex align-items-center justify-content-between">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"> Remember me </label>
+                        <input type="checkbox" class="form-check-input" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
+                      </label>
                     </div>
                     <a href="{{route('password.request')}}" class="forgot-pass">Forgot password</a>
                   </div>

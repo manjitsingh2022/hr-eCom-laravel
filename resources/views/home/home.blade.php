@@ -29,13 +29,6 @@ The Beverly Hills Luxury Boutique
   border-radius: 5px;
 }
 
-.first-page a {
-    color: #ff0000; /* Replace with your desired color */
-  }
-
-  .last-page a {
-    color: #0000ff ; /* Replace with your desired color */
-  } 
 
 
 </style>
@@ -85,34 +78,38 @@ The Beverly Hills Luxury Boutique
         
 <!-- Pagination -->
 <nav>
-  <ul class="  mb-4 mt-4 d-flex justify-content-between">
-    <li class="page-item first-page">
+  <ul class="pagination mb-3 mt-3 d-flex justify-content-around  mr-3 ml-3">
+    <li>
       @if ($products->onFirstPage())
-      <span class="page-link disabled">&laquo; Previous</span>
+        <span class="disabled btn btn-sm">&laquo; Previous</span>
       @else
-      <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
+        <a class="btn btn-sm " href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
       @endif
     </li>
 
-    <li class="page-item d-flex justify-content-center">
+    <li class="d-flex justify-content-center">
       <ul class="pagination m-0">
         @for ($i = 1; $i <= $products->lastPage(); $i++)
-        <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">
-          <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
-        </li>
+          @if ($i == $products->currentPage() || $i == 1 || $i == 2)
+            <li class="{{ $i == $products->currentPage() ? 'active' : '' }}">
+              <a class="btn btn-sm mr-3" href="{{ $products->url($i) }}">{{ $i }}</a>
+            </li>
+          @endif
         @endfor
       </ul>
     </li>
 
-    <li class="page-item last-page">
+    <li>
       @if ($products->hasMorePages())
-      <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+        <a class="btn btn-sm " href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
       @else
-      <span class="page-link disabled">Next &raquo;</span>
+        <span class="disabled btn btn-sm ">Next &raquo;</span>
       @endif
     </li>
   </ul>
 </nav>
+
+
 
 
 

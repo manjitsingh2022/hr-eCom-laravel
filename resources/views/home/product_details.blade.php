@@ -74,5 +74,38 @@ Product Details
             @endforelse
         </div>
     </div>
+
+    <!-- Pagination -->
+<nav>
+  <ul class="pagination mb-3 mt-3 d-flex justify-content-around  mr-3 ml-3">
+    <li>
+      @if ($products->onFirstPage())
+        <span class="disabled btn btn-sm">&laquo; Previous</span>
+      @else
+        <a class="btn btn-sm " href="{{ $products->previousPageUrl() }}" rel="prev">&laquo; Previous</a>
+      @endif
+    </li>
+
+    <li class="d-flex justify-content-center">
+      <ul class="pagination m-0">
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+          @if ($i == $products->currentPage() || $i == 1 || $i == 2)
+            <li class="{{ $i == $products->currentPage() ? 'active' : '' }}">
+              <a class="btn btn-sm mr-3" href="{{ $products->url($i) }}">{{ $i }}</a>
+            </li>
+          @endif
+        @endfor
+      </ul>
+    </li>
+
+    <li>
+      @if ($products->hasMorePages())
+        <a class="btn btn-sm " href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+      @else
+        <span class="disabled btn btn-sm ">Next &raquo;</span>
+      @endif
+    </li>
+  </ul>
+</nav>
 @endsection
 

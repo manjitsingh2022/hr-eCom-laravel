@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
     public function view_category()
     {
-        $categories = Category::paginate(10);
+
+        $categories = Category::leftJoin('products', 'categories.id', '=', 'products.parent_id')
+            ->select('categories.id', 'categories.category_name', DB::raw('COUNT(products.parent_id) AS product_count'))
+            ->groupBy('categories.id', 'categories.category_name')
+            ->paginate(10);
+        // $categories = Category::paginate(10);
         return view('admin.category', compact('categories'));
     }
 
@@ -100,6 +106,36 @@ class CategoryController extends Controller
         }
     }
 
+    // public function delete_category($id)
+    // {
+    //     $category = Category::find($id);
+
+    //     if (!$category) {
+    //         return redirect()->back()->with("errors", "Category not found.");
+    //     }
+
+    //     // Check if the category has associated products
+    //     $products = $category->products;
+
+    //     if ($products->count() > 0) {
+    //         // Option 1: Delete all associated products
+    //         // This will permanently delete all products associated with the category.
+    //         // You should only do this if it's the desired behavior in your application.
+    //         $category->products()->delete();
+
+    //         // Option 2: Change the category for all associated products
+    //         // Uncomment the following line if you want to update the category of associated products.
+    //         // $category->products()->update(['category_id' => $defaultCategoryId]);
+
+    //         // After handling the associated products, you can now delete the category
+    //         $category->delete();
+    //         return redirect()->back()->with("message", "Category and associated products deleted successfully.");
+    //     } else {
+    //         // If no associated products, simply delete the category
+    //         $category->delete();
+    //         return redirect()->back()->with("message", "Category deleted successfully.");
+    //     }
+    // }
 
 
     public function updateStatus(Request $request, $id)
