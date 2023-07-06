@@ -22,9 +22,10 @@ Settings
 @endsection
 
 @section('content')
-@php
+<?php 
 $settings = settings();
-@endphp
+print_r($settings);
+?>
 <div class="card px-5">
     <div class="row justify-content-center">
         <div class="col-md-6 mt-4">

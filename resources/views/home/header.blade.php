@@ -1,7 +1,8 @@
-@php
-$settings = settings();
-@endphp
- <!-- Preloader Start-->
+
+ 
+ <?php 
+ $settings = settings();
+ ?><!-- Preloader Start-->
  <header>
     <!-- Header Start -->
     <div class="header-area ">

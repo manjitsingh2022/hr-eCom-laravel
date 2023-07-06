@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+    // 'default' => env('MAIL_MAILER', 'sendmail'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
+
         ],
 
         'ses' => [
@@ -85,6 +87,15 @@ return [
                 'log',
             ],
         ],
+
+        'stream' => [
+            'ssl' => [
+                'verify_peer' => true,
+                'verify_peer_name' => true,
+                'allow_self_signed' => false,
+            ],
+        ],
+
     ],
 
     /*
@@ -98,13 +109,7 @@ return [
     |
     */
 
-    'stream' => [
-        'ssl' => [
-            'allow_self_signed' => true,
-            'verify_peer' => true,
-            'verify_peer_name' => true,
-        ],
-    ],
+
 
 
     'from' => [

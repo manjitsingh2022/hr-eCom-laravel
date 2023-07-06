@@ -11,6 +11,7 @@ class CategoryController extends Controller
     public function view_category()
     {
 
+
         $categories = Category::leftJoin('products', 'categories.id', '=', 'products.parent_id')
             ->select('categories.id', 'categories.category_name', DB::raw('COUNT(products.parent_id) AS product_count'))
             ->groupBy('categories.id', 'categories.category_name')

@@ -1,6 +1,6 @@
-@php
+<?php 
 $settings = settings();
-@endphp
+?>
  </main>
 <footer>
     <!-- Footer Start-->

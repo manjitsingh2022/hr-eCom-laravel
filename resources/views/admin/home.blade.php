@@ -53,7 +53,8 @@
               </div>
           @endif
           @php
-          $settings = settings();
+$settings = settings();
+
           @endphp
 
           
