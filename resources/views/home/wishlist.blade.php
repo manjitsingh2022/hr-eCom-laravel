@@ -64,7 +64,7 @@ wishlist
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="single-popular-items mb-50 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
                                 <div class="popular-img">
-                                    <img src="{{ asset('product/' . $product->image) }}" alt="" class="product_image">
+                                    <img src="{{ asset('public/assets/' . $product->image) }}" alt="" class="product_image">
                                     <div class="img-cap">
                                         <span>{{ $product->product_name }}</span>
                                     </div>

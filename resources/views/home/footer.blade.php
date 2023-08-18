@@ -81,7 +81,7 @@ $settings = settings();
                  
                     <li><a style="text-decoration:none">{{ isset($settings['phone']) ? $settings['phone'] : 'phone' }}</a></li>
                     <li><a href="{{route('home')}}">{{ isset($settings['domain']) ? $settings['domain'] : 'domain' }}</a></li>
-                    <li><a style="text-decoration:none" >{{ isset($settings['address']) ? $settings['address'] : 'address' }}></li>
+                    <li><a style="text-decoration:none" >{{ isset($settings['address']) ? $settings['address'] : 'address' }}</li>
             </div>
         </div>
     </div>

@@ -15,11 +15,7 @@ Category Updated
         width: 200px;
     }
 
-    input[type="text"],
-    input[type="number"],
-    select {
-        color: black;
-    }
+   
 </style>
 @endsection
 

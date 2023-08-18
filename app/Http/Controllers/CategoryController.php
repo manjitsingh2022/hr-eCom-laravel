@@ -95,10 +95,9 @@ class CategoryController extends Controller
 
 
 
-    public function delete_catagory($id)
+    public function deleteCategory($id)
     {
         $data = Category::find($id);
-
         if ($data) {
             $data->delete();
             return redirect()->back()->with("message", "Category deleted successfully.");

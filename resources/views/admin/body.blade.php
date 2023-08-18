@@ -78,54 +78,48 @@ input:checked + .slider:before {
         <h4 class="card-title text-center">Category Details</h4>
         
         <div class="table-responsive">
-          <table class="table table-bordered table-contextual">
+          <table class="table  table-contextual">
             <thead>
-              <tr>
-                {{-- <th>ID</th> --}}
-                <th>Parent Category Name</th>
-                <th>Category Name</th>
-                <th>Status</th>
-              </tr>
+                <tr>
+                    {{-- <th>ID</th> --}}
+                    <th>Category Name</th>
+                    <th>Parent Category Name</th>
+                    <th>Status</th>
+                </tr>
             </thead>
             <tbody>
-              @foreach ($categories as $category)
-             
-              <tr>
-                  {{-- <td>{{ $category->id }}</td> --}}
-                  <td>
-                      @if ($category->parent_id)
-                          {{ $category->parent->category_name }}
-                      @endif
-                  </td>
-                  <td>{{ $category->category_name }}</td>
-                  <td>
-                      <label class="switch">
-                          <input type="checkbox" data-category-id="{{ $category->id }}" data-route="{{ route('admin.category.updateStatus', $category->id) }}" {{ $category->status == 1 ? 'checked' : '' }}>
-                          <span class="slider"></span>
-                      </label>
-                  </td>
-              </tr>
-              @if ($category->subcategories->count() > 0)
-                  @foreach ($category->subcategories as $subcategory)
-                      <tr>
-                          {{-- <td>{{ $subcategory->id }}</td> --}}
-                          <td>
-                              {{ $category->category_name }}
-                          </td>
-                          <td>{{ $subcategory->category_name }}</td>
-                          <td>
-                              <label class="switch">
-                                  <input type="checkbox" data-category-id="{{ $subcategory->id }}" data-route="{{ route('admin.category.updateStatus', $subcategory->id) }}" {{ $subcategory->status == 1 ? 'checked' : '' }}>
-                                  <span class="slider"></span>
-                              </label>
-                          </td>
-                      </tr>
-                  @endforeach
-              @endif
-          @endforeach
-          
+                @foreach ($categories as $category)
+                <tr>
+                    {{-- <td>{{ $category->id }}</td> --}}
+                    <td>{{ $category->category_name }}</td>
+                    <td>None</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" data-category-id="{{ $category->id }}" data-route="{{ route('admin.category.updateStatus', $category->id) }}" {{ $category->status == 1 ? 'checked' : '' }}>
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                </tr>
+                @if ($category->subcategories->count() > 0)
+                @foreach ($category->subcategories as $subcategory)
+              
+                <tr>
+                    {{-- <td>{{ $subcategory->id }}</td> --}}
+                    <td>{{ $subcategory->category_name }}</td>
+                    <td>{{ $category->category_name }}</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" data-category-id="{{ $subcategory->id }}" data-route="{{ route('admin.category.updateStatus', $subcategory->id) }}" {{ $subcategory->status == 1 ? 'checked' : '' }}>
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+                @endforeach
             </tbody>
-          </table>
+        </table>
+        
         </div>
     </div>
   </div>

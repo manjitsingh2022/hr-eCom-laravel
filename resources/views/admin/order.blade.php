@@ -88,7 +88,7 @@
       <td>{{ $order->price }}</td>
       <td>{{ $order->product_title }}</td>
       <td>{{ $order->quantity }}</td>
-      <td><img src="{{ asset('product/' . $order->image) }}" alt="Order Image"
+      <td><img src="{{ asset('public/assets/' . $order->image) }}" alt="Order Image"
           style="width: 100px; height: 100px; border-radius: 0;"></td>
       <td>{{ $order->payment_status }}</td>
       <td>{{ $order->delivery_status }}</td>

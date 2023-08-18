@@ -29,10 +29,11 @@ Category Lists
     <h2 class="h2_font">Categories</h2>
 
     <div class="container">
-        <table class="table table-bordered table-hover mx-auto w-50 text-center">
+        <table class="table  table-hover mx-auto w-50 text-center">
             <thead>
                 <tr>
                     <th>Category Name</th>
+                    <th>Products in this Category</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -41,19 +42,20 @@ Category Lists
                 @forelse ($categories as $category)
 
               
+              
                 <tr>
                     <td>
                         {{ $category->category_name }}
-                        <span >({{ $category->product_count }})</span>
                     </td>
-                                
+                    <td>{{ $category->product_count }}</td>          
                     <td> 
                         <a class="nav-link" href="{{ route('edit_category', $category->id) }}">
-                            <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                            <button type="button" class="btn btn-inverse-info btn-rounded btn-fw btn-sm">Edit</button>
                         </a>
                     </td>
                     <td>
                         @if ($category->product_count >= 1)
+                    
                           <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" disabled>Delete</button>
                         @else
                           <button type="button" class="btn btn-inverse-danger btn-rounded btn-fw btn-sm" data-toggle="modal" data-target="#myConfirmDlg{{ $category->id }}">Delete</button>
@@ -75,7 +77,8 @@ Category Lists
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <a href="{{ route('delete_category', $category->id) }}" class="btn btn-danger">Delete</a>
+                            
+                                <a href="{{  route('delete_category',  $category->id)  }}" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>

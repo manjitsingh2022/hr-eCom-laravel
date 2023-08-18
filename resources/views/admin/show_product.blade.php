@@ -50,7 +50,7 @@ Products
     <div class="card px-5">
         <h1 class="div_center">Products</h1>
         <div>
-            <button id="deleteAllSelectedRecords" class="btn btn-danger btn-rounded btn-fw " type="button" >Delete All Products</button>
+            <button id="deleteAllSelectedRecords" class="btn btn-danger btn-rounded btn-fw " type="button" >Delete Selected Products</button>
                 <!-- Add this element to display the message -->
                 <p id="deleteMsg" style="display: none;">No records selected for deletion.</p>
 
@@ -77,14 +77,14 @@ Products
                         <td><input type="checkbox" value="{{ $product->id }}" class="select-single"></td>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->description }}</td>
-                        <td><img src="{{ asset('product/' . $product->image) }}" alt="Product Image" class="product-image"></td>
+                        <td><img src="{{ asset('public/assets/' . $product->image) }}" alt="Product Image" class="product-image"></td>
                         <td>{{ $product->category->category_name }}</td>
                         <td>{{ $product->quantity }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->discount_price }}</td>
                         <td>
                             <a class="nav-link" href="{{ route('product.edit', ['id' => $product->id]) }}">
-                                <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                                <button type="button" class="btn btn-inverse-info btn-rounded btn-fw btn-sm">Edit</button>
                             </a>
                         </td>
                         <td>

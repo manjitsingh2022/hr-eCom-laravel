@@ -15,11 +15,7 @@ Update Product
         width: 200px;
     }
 
-    input[type="text"],
-    input[type="number"],
-    select {
-        color: black;
-    }
+
 </style>
 @endsection
 
@@ -83,7 +79,7 @@ Update Product
                             <input type="file" name="image" id="image" class="form-control">
                             @if ($product->image)
                             <div class="mt-2 ms-3">
-                                <img src="{{ asset('product/' . $product->image) }}" alt="Please upload an image for the product." width="150">
+                                <img src="{{ asset('public/assets/' . $product->image) }}" alt="Please upload an image for the product." width="150">
                             </div>
                             @endif
                         </div>

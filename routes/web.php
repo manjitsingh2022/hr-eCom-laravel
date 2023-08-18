@@ -58,7 +58,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('admin', [AdminController::class, 'adminIndex'])->name('dashboard');
         Route::get('category', [CategoryController::class, 'view_category'])->name('viewcategorylist');
-        Route::get('category/delete/{id}', [CategoryController::class, 'delete_catagory'])->name('delete_category');
+        Route::get('category/delete/{id}/new', [CategoryController::class, 'deleteCategory'])->name('delete_category');
+        
         Route::get('categories/create', [CategoryController::class, 'create'])->name('viewcategory');
         Route::post('categories', [CategoryController::class, 'storeCatgory'])->name('categories.store');
         Route::post('get-subcategories', [CategoryController::class, 'getSubcategories'])->name('getSubcategories');
@@ -91,6 +92,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
     });
 });
+
 Route::fallback(function () {
     if (request()->route() === null) {
         return redirect()->route('home');

@@ -40,6 +40,9 @@ Add Product
       <div class="col-md-6 offset-md-3">
         <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
           @csrf
+
+          <input class="form-control" type="hidden" name="base64"  />
+
           <div class="mb-3">
             <label for="product_name" class="form-label">Product Title:</label>
             <input class="form-control" type="text" name="product_name" placeholder="Write a product name." required />
@@ -79,7 +82,8 @@ Add Product
         
           <div class="mb-3">
             <label for="image" class="form-label">Product Image:</label>
-            <input type="file" name="image" id="image" class="form-control" required />
+            <input type="file" name="image" accept="image/*" class="form-control" required>
+
           </div>
           <div class="mb-5 div_center">
             <input type="submit" value="Submit" class="btn btn-primary" />

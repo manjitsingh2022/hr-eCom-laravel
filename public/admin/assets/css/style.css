@@ -10287,7 +10287,7 @@ pre code {
 .jsgrid .jsgrid-table td {
     padding: 0.9375rem;
     vertical-align: top;
-    border-top: 1px solid #2c2e33;
+    border-top: 1px solid #adadad;
 }
 .table thead th,
 .jsgrid .jsgrid-table thead th {
@@ -10329,7 +10329,7 @@ pre code {
 
 .table-hover tbody tr:hover {
     color: #ffffff;
-    background-color: #6c7293;
+    /* background-color: #6c7293; */
 }
 
 .table-primary,
@@ -16811,7 +16811,7 @@ input[type="button"].btn-block {
 
 .nav-link {
     display: block;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
 }
 .nav-link:hover,
 .nav-link:focus {
@@ -17284,7 +17284,7 @@ input[type="button"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #040303cc;
+    background-color: #a9a9a9cc;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -17547,9 +17547,9 @@ input[type="button"].btn-block {
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
-    background-color: #000000;
-    border: 1px solid #dee2e6;
+    color: #000000;
+    cursor: pointer;
+  
 }
 .page-link:hover,
 .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:hover,
@@ -25725,9 +25725,9 @@ code {
     font-weight: normal;
     font-size: 0.875rem;
     padding: 0.625rem 0.6875rem;
-    background-color: #2a3038;
+    background-color: #ffffff;
     border-radius: 2px;
-    color: #ffffff;
+    color: #000000
 }
 .form-control:focus,
 .asColorPicker-input:focus,
@@ -25859,7 +25859,7 @@ select.tt-query,
 select.tt-hint {
     padding: 0.4375rem 0.75rem;
     border: 0;
-    color: #4b5564;
+    color: #000000;
 }
 select.form-control:focus,
 select.asColorPicker-input:focus,
@@ -27266,14 +27266,14 @@ div.tagsinput {
 .table,
 .jsgrid .jsgrid-table {
     margin-bottom: 0;
-    color: #6c7293;
+    color: #ffffff;
 }
 .table thead th,
 .jsgrid .jsgrid-table thead th {
     border-top: 0;
     border-bottom-width: 1px;
     font-weight: 500;
-    color: #6c7293;
+    color: #ffffff;
 }
 .table thead th i,
 .jsgrid .jsgrid-table thead th i {

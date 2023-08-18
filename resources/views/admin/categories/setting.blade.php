@@ -69,7 +69,7 @@ Settings
                   <td>{{ $setting->setting_value }}</td>
                   <td>
                       <a class="nav-link" href="{{ route('settings.edit', $setting->id) }}">
-                          <button type="button" class="btn btn-inverse-warning btn-rounded btn-fw btn-sm">Edit</button>
+                          <button type="button" class="btn btn-inverse-info btn-rounded btn-fw btn-sm">Edit</button>
                       </a>
                   </td>
                   <td>

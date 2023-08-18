@@ -13,7 +13,6 @@ class ProductController extends Controller
         $categories = Category::where('parent_id', 0)->get();
         return view('admin.product', compact('categories'));
     }
-
     public function storeProduct(Request $request)
     {
         $product = new Product;
@@ -23,23 +22,26 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->discount_price = $request->discount_price;
         $product->parent_id = $request->parent_id;
-
+    
         if ($request->parent_id != 0 && $request->subcategory_id) {
             $product->parent_id = $request->subcategory_id;
         }
-
+    
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             date_default_timezone_set('Asia/Kolkata');
             $imageName = date('Y-m-d_H-i-s') . '.' . $image->getClientOriginalName();
-            $image->move('product', $imageName);
+            $image->move(public_path('assets/'), $imageName);
             $product->image = $imageName;
         }
 
         $product->save();
-
+    
         return redirect()->route('showproduct')->with('message', 'Product added successfully.');
     }
+    
+    
+    
 
 
 
@@ -113,10 +115,10 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('product', $imageName);
+            $image->move(public_path('assets/'), $imageName);
 
             if ($product->image && $product->image !== $imageName) {
-                $oldImagePath = public_path('product/' . $product->image);
+                $oldImagePath = public_path('assets/' . $product->image);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }

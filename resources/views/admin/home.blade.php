@@ -3,7 +3,7 @@
 <head>
     @include('admin.css')
     @yield('style')
-   <style>
+   {{-- <style>
      .div_center {
         text-align: center;
         padding-top: 40px;
@@ -21,7 +21,7 @@
     }
 
 
-   </style>
+   </style> --}}
 
    
 </head>
@@ -77,7 +77,7 @@ $settings = settings();
                         </ul> --}}
                         <ul class="navbar-nav navbar-nav-right">
                        
-                          <li class="nav-item dropdown d-none d-lg-block create-new-button" >
+                          <li class="nav-item dropdown d-none d-lg-block create-new-button" style="margin-bottom: 13px">
                             <a class="nav-link btn btn-success btn-rounded btn-fw" href="{{route('home')}}" target="_blank">
                                     View
                             </a>

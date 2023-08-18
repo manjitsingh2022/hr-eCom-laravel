@@ -190,7 +190,7 @@ class UserController extends Controller
                 }
 
 
-                if ($user->usertype === "1") {
+                if ($user->usertype == 1) {
                     return redirect()->route('dashboard')->with('message', 'Login successful');
                 } else {
                     return redirect()->route('home')->with('message', 'Login successful');
